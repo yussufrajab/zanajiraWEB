@@ -1,0 +1,238 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  Editor
+  Reviewer
+  Administrator
+}
+
+enum UserStatus {
+  Active
+  Deactivated
+}
+
+enum ContentStatus {
+  Draft
+  InReview
+  Published
+  Rejected
+  Archived
+}
+
+enum VacancyStatus {
+  Draft
+  InReview
+  Published
+  Closed
+  Archived
+}
+
+enum InterviewType {
+  CallForInterview
+  InterviewResult
+}
+
+enum AuditAction {
+  Create
+  Update
+  Publish
+  Reject
+  Delete
+  AuthSuccess
+  AuthFailure
+}
+
+model User {
+  id           String      @id @default(uuid())
+  name         String
+  email        String      @unique
+  passwordHash String
+  role         UserRole    @default(Editor)
+  status       UserStatus  @default(Active)
+  mfaSecret    String?
+  mfaEnabled   Boolean     @default(false)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  authoredNews       NewsPost[]         @relation("NewsAuthor")
+  authoredVacancies  Vacancy[]          @relation("VacancyAuthor")
+  authoredInterviews InterviewNotice[]  @relation("InterviewAuthor")
+  reviewedNews       NewsPost[]         @relation("NewsReviewer")
+  reviewedVacancies  Vacancy[]          @relation("VacancyReviewer")
+  reviewedInterviews InterviewNotice[]  @relation("InterviewReviewer")
+  contentVersions ContentVersion[] @relation("ContentVersionAuthor")
+  auditLogs    AuditLog[]
+}
+
+model Department {
+  id      String  @id @default(uuid())
+  nameSw  String
+  nameEn  String?
+  vacancies        Vacancy[]         @relation("VacancyDepartment")
+  interviewNotices InterviewNotice[] @relation("InterviewDepartment")
+  pages   Page[]   @relation("PageDepartment")
+}
+
+model Page {
+  id           String       @id @default(uuid())
+  slug         String       @unique
+  titleSw      String
+  titleEn      String?
+  bodySw       String
+  bodyEn       String?
+  parentId     String?
+  parent       Page?        @relation("PageTree", fields: [parentId], references: [id])
+  children     Page[]       @relation("PageTree")
+  departmentId String?
+  department   Department?  @relation("PageDepartment", fields: [departmentId], references: [id])
+  updatedAt    DateTime     @updatedAt
+  createdAt    DateTime     @default(now())
+}
+
+model NewsPost {
+  id            String         @id @default(uuid())
+  slug          String         @unique
+  titleSw       String
+  titleEn       String?
+  bodySw        String
+  bodyEn        String?
+  publishDate   DateTime       @default(now())
+  status        ContentStatus  @default(Draft)
+  coverImageKey String?
+  authorId      String
+  author        User           @relation("NewsAuthor", fields: [authorId], references: [id])
+  reviewerId    String?
+  reviewer      User?          @relation("NewsReviewer", fields: [reviewerId], references: [id])
+  versions      ContentVersion[] @relation("NewsVersions")
+  documents     Document[]     @relation("NewsDocuments")
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@index([status, publishDate])
+}
+
+model Vacancy {
+  id            String         @id @default(uuid())
+  slug          String         @unique
+  title         String
+  mda           String
+  departmentId  String?
+  department    Department?    @relation("VacancyDepartment", fields: [departmentId], references: [id])
+  publishDate   DateTime       @default(now())
+  closingDate   DateTime
+  status        VacancyStatus  @default(Draft)
+  applyUrl      String?
+  authorId      String
+  author        User           @relation("VacancyAuthor", fields: [authorId], references: [id])
+  reviewerId    String?
+  reviewer      User?          @relation("VacancyReviewer", fields: [reviewerId], references: [id])
+  versions      ContentVersion[] @relation("VacancyVersions")
+  documents     Document[]     @relation("VacancyDocuments")
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@index([status, closingDate])
+  @@index([mda])
+}
+
+model InterviewNotice {
+  id            String         @id @default(uuid())
+  slug          String         @unique
+  title         String
+  mda           String
+  type          InterviewType
+  departmentId  String?
+  department    Department?    @relation("InterviewDepartment", fields: [departmentId], references: [id])
+  publishDate   DateTime       @default(now())
+  status        ContentStatus  @default(Draft)
+  authorId      String
+  author        User           @relation("InterviewAuthor", fields: [authorId], references: [id])
+  reviewerId    String?
+  reviewer      User?          @relation("InterviewReviewer", fields: [reviewerId], references: [id])
+  versions      ContentVersion[] @relation("InterviewVersions")
+  documents     Document[]     @relation("InterviewDocuments")
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@index([type, status, publishDate])
+}
+
+model Document {
+  id             String   @id @default(uuid())
+  filename       String
+  mimeType       String
+  sizeBytes      Int
+  storageKey     String   @unique
+  ownerType      String
+  ownerId        String
+  downloadCount  Int      @default(0)
+  scannedClean   Boolean  @default(false)
+  createdAt      DateTime @default(now())
+
+  newsPost       NewsPost?        @relation("NewsDocuments", fields: [ownerId], references: [id], map: "Document_owner_news_fk")
+  vacancy        Vacancy?         @relation("VacancyDocuments", fields: [ownerId], references: [id], map: "Document_owner_vacancy_fk")
+  interviewNotice InterviewNotice? @relation("InterviewDocuments", fields: [ownerId], references: [id], map: "Document_owner_interview_fk")
+
+  @@index([ownerType, ownerId])
+}
+
+model ContentVersion {
+  id           String   @id @default(uuid())
+  entityType   String
+  entityId     String
+  snapshot     Json
+  authorId     String?
+  author       User?    @relation("ContentVersionAuthor", fields: [authorId], references: [id])
+  createdAt    DateTime @default(now())
+
+  newsPost      NewsPost?       @relation("NewsVersions", fields: [entityId], references: [id], map: "ContentVersion_entity_news_fk")
+  vacancy       Vacancy?        @relation("VacancyVersions", fields: [entityId], references: [id], map: "ContentVersion_entity_vacancy_fk")
+  interviewNotice InterviewNotice? @relation("InterviewVersions", fields: [entityId], references: [id], map: "ContentVersion_entity_interview_fk")
+
+  @@index([entityType, entityId, createdAt])
+}
+
+model AuditLog {
+  id          String      @id @default(uuid())
+  userId      String?
+  user        User?       @relation(fields: [userId], references: [id])
+  action      AuditAction
+  entityType  String
+  entityId    String
+  diff        Json?
+  timestamp   DateTime    @default(now())
+
+  @@index([entityType, entityId])
+  @@index([timestamp])
+}
+
+model Subscriber {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  criteria  Json?
+  createdAt DateTime @default(now())
+}
+
+model PageView {
+  id        String   @id @default(uuid())
+  path      String
+  locale    String
+  createdAt DateTime @default(now())
+
+  @@index([path, createdAt])
+}
+
+model DocumentDownload {
+  id          String   @id @default(uuid())
+  documentId  String
+  createdAt   DateTime @default(now())
+
+  @@index([documentId, createdAt])
+}
