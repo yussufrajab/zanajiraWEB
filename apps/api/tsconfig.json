@@ -9,7 +9,8 @@
     "useDefineForClassFields": false,
     "types": ["node", "jest"],
     "paths": {
-      "@zanweb/prisma/client": ["../../packages/prisma/src/client.ts"]
+      "@zanweb/prisma/client": ["../../packages/prisma/src/client.ts"],
+      "@zanweb/shared": ["../../packages/shared/src"]
     }
   },
   "include": ["src"]

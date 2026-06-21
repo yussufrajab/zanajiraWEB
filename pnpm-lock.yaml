@@ -50,6 +50,9 @@ importers:
       '@zanweb/prisma':
         specifier: workspace:*
         version: link:../../packages/prisma
+      '@zanweb/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
       bcrypt:
         specifier: ^5.1.1
         version: 5.1.1
