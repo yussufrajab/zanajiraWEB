@@ -1,0 +1,24 @@
+{
+  "name": "zanweb",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev:api": "pnpm --filter @zanweb/api dev",
+    "dev:web": "pnpm --filter @zanweb/web dev",
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "prisma:generate": "pnpm --filter @zanweb/prisma prisma:generate",
+    "prisma:migrate": "pnpm --filter @zanweb/prisma prisma:migrate",
+    "prisma:seed": "pnpm --filter @zanweb/prisma prisma:seed",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "prettier": "^3.2.0"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": { "node": ">=20.10.0" }
+}
