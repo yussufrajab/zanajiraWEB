@@ -12,8 +12,11 @@
     "prisma:generate": "pnpm --filter @zanweb/prisma prisma:generate",
     "prisma:migrate": "pnpm --filter @zanweb/prisma prisma:migrate",
     "prisma:seed": "pnpm --filter @zanweb/prisma prisma:seed",
-    "docker:up": "docker compose up -d",
-    "docker:down": "docker compose down"
+    "services:start": "./manage.sh start",
+    "services:stop": "./manage.sh stop",
+    "services:status": "./manage.sh status",
+    "apps:start": "./manage.sh start-apps",
+    "apps:stop": "./manage.sh stop-apps"
   },
   "devDependencies": {
     "typescript": "^5.4.0",

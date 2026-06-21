@@ -25,3 +25,6 @@ test-results/
 
 # WSL/Windows NTFS alternate data stream artifacts
 *:Zone.Identifier
+
+# runtime (manage.sh pidfiles, logs, minio data)
+.run/
