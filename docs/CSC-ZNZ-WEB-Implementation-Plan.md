@@ -4,9 +4,11 @@
 
 **Goal:** Replace the legacy WordPress site at `zanajira.go.tz` with a custom bilingual (Swahili/English) public website and content-management backend for the Civil Service Commission – Zanzibar, covering static pages, News, Vacancy Announcements, Call-for-Interview notices, a document repository, search, and a role-based editorial workflow.
 
-**Architecture:** A pnpm monorepo with a Next.js app (SSR public site + admin UI shell) and a NestJS REST API, backed by PostgreSQL via Prisma, MinIO (S3-compatible) for documents/media, and Redis + BullMQ for caching and background jobs. The Next.js frontend renders server-side for SEO and calls the NestJS API; the API is the single source of business logic, RBAC, and the content workflow. Everything is containerized (Docker + Nginx) for deployment to a government data center or approved cloud.
+**Architecture:** A pnpm monorepo with a Next.js app (SSR public site + admin UI shell) and a NestJS REST API, backed by PostgreSQL via Prisma, MinIO (S3-compatible) for documents/media, and Redis + BullMQ for caching and background jobs. The Next.js frontend renders server-side for SEO and calls the NestJS API; the API is the single source of business logic, RBAC, and the content workflow.
 
-**Tech Stack:** TypeScript, pnpm workspaces, Next.js (App Router, SSR/SSG), NestJS, PostgreSQL, Prisma, MinIO (S3 SDK), Redis + BullMQ, Jest (backend), Vitest/Playwright (frontend), Docker, Nginx, `next-intl` (i18n), ClamAV (malware scan), nodemailer (SMTP).
+**No Docker.** Per the user's directive, containers are not used anywhere — not in dev, not in production. The backing services (PostgreSQL, Redis, MinIO, ClamAV) are **pre-installed native services on the host**, and the app processes (NestJS API, Next.js web) run as native processes. A single `manage.sh` script at the repo root starts, stops, restarts, and reports status for all of them (services + apps). Production targets a bare-metal server / VM with Nginx installed on the host as the reverse proxy (TLS termination, routing `/api` → API, everything else → web).
+
+**Tech Stack:** TypeScript, pnpm workspaces, Next.js (App Router, SSR/SSG), NestJS, PostgreSQL, Prisma, MinIO (S3 SDK), Redis + BullMQ, Jest (backend), Vitest/Playwright (frontend), Nginx (on-host reverse proxy), `manage.sh` (bash service manager), `next-intl` (i18n), ClamAV (native clamd, malware scan), nodemailer (SMTP).
 
 **Source SRS:** `CSC-ZNZ-SRS-WEB-001.md` (v1.0, 21 June 2026). Requirement IDs (e.g. `REQ-VAC-01`) are referenced in tasks for traceability.
 
@@ -20,7 +22,7 @@ This SRS spans multiple subsystems (frontend, API, storage, background jobs, mig
 
 | # | Phase | File | Milestone |
 |---|---|---|---|
-| 1 | Foundation | [phase-1-foundation.md](./phase-1-foundation.md) | Runnable monorepo, tooling, Docker dev stack |
+| 1 | Foundation | [phase-1-foundation.md](./phase-1-foundation.md) | Runnable monorepo, tooling, `manage.sh` service manager |
 | 2 | Data layer | [phase-2-data-layer.md](./phase-2-data-layer.md) | Prisma schema, migrations, seed |
 | 3 | Auth & RBAC | [phase-3-auth-rbac.md](./phase-3-auth-rbac.md) | Staff login, JWT, roles, MFA, audit log |
 | 4 | Documents | [phase-4-documents.md](./phase-4-documents.md) | MinIO upload/download, validation, malware scan |
@@ -66,15 +68,17 @@ zanWEB/
 ├── .env.example
 ├── .gitignore
 ├── tsconfig.base.json
-├── docker-compose.yml              # local dev: postgres, minio, redis, clamav
-├── docker-compose.prod.yml
+├── manage.sh                       # start/stop/restart/status for native services + apps
 ├── infra/
 │   ├── nginx/
-│   │   └── site.conf               # reverse proxy, TLS termination, routing
-│   ├── api.Dockerfile
-│   ├── web.Dockerfile
-│   └── clamav/
-│       └── clamav.conf
+│   │   └── site.conf               # on-host reverse proxy: TLS, /api -> API, / -> web
+│   ├── clamav/
+│   │   └── clamav.conf             # clamd config (native service)
+│   ├── systemd/                    # optional systemd unit files for prod
+│   │   ├── zanweb-api.service
+│   │   └── zanweb-web.service
+│   ├── backup.sh                   # daily pg_dump + mc mirror (native, no docker)
+│   └── restore.sh
 ├── apps/
 │   ├── api/                        # NestJS backend
 │   │   ├── package.json
