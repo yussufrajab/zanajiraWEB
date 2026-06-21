@@ -14,6 +14,7 @@ mkdir -p "$PID_DIR"
 LOG_DIR="${ROOT_DIR}/.run/logs"
 mkdir -p "$LOG_DIR"
 
+# App ports are read by the apps themselves from .env; kept here for reference/status only.
 API_PORT="${API_PORT:-4000}"
 WEB_PORT="${WEB_PORT:-3000}"
 MINIO_DATA="${MINIO_DATA:-${ROOT_DIR}/.run/minio-data}"
@@ -36,7 +37,7 @@ start_bg() { # <name> <pidfile> <logfile> <command...>
   nohup "$@" >>"$logfile" 2>&1 &
   echo $! > "$pidfile"
   sleep 0.3
-  if pid_alive "$(cat "$pidfile")"; then echo "$(c_grn "$name started (pid $(cat "$pidfile"))")";
+  if pid_alive "$(cat "$pidfile" 2>/dev/null || true)"; then echo "$(c_grn "$name started (pid $(cat "$pidfile" 2>/dev/null || true))")";
   else echo "$(c_red "$name failed to start — see $logfile")"; return 1; fi
 }
 
@@ -108,11 +109,19 @@ minio_ensure_bucket() {
 
 # ---------- apps ----------
 api_start() {
+  if [[ ! -f "$ROOT_DIR/apps/api/dist/main.js" ]]; then
+    c_ylw "api not built yet (apps/api/dist/main.js missing) — run: pnpm --filter @zanweb/api build"
+    return 0
+  fi
   start_bg api "$PID_DIR/api.pid" "$LOG_DIR/api.log" \
     node "$ROOT_DIR/apps/api/dist/main.js"
 }
 api_stop()  { stop_bg api "$PID_DIR/api.pid"; }
 web_start() {
+  if [[ ! -f "$ROOT_DIR/apps/web/server.js" ]]; then
+    c_ylw "web not built yet (apps/web/server.js missing) — run: pnpm --filter @zanweb/web build"
+    return 0
+  fi
   start_bg web "$PID_DIR/web.pid" "$LOG_DIR/web.log" \
     node "$ROOT_DIR/apps/web/server.js"
 }
@@ -123,7 +132,10 @@ SERVICES=(postgres redis minio clamav)
 APPS=(api web)
 
 cmd_start() {
-  postgres_start; redis_start; minio_start; clamav_start
+  postgres_start || c_red "postgres start failed"
+  redis_start    || c_red "redis start failed"
+  minio_start    || c_red "minio start failed"
+  clamav_start
   minio_ensure_bucket
 }
 cmd_stop()  { web_stop; api_stop; clamav_stop; minio_stop; redis_stop; postgres_stop; }

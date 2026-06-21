@@ -16,7 +16,7 @@ Install these on the host before running `./manage.sh start`:
 - `./manage.sh stop`    — stop everything
 - `./manage.sh status`  — show service + app status
 
-## Production
-Bare-metal / VM with Nginx installed on the host (see `infra/nginx/site.conf`).
-Optional systemd units live in `infra/systemd/`. Backups via `infra/backup.sh`
-(native `pg_dump` + `mc mirror`).
+## Production (planned — added in later phases)
+Bare-metal / VM with Nginx installed on the host (`infra/nginx/site.conf`).
+Systemd units for the apps (`infra/systemd/`). Backups via `infra/backup.sh`
+(native `pg_dump` + `mc mirror`). These files are created in later phases.
