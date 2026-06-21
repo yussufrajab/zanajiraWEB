@@ -7,6 +7,10 @@ const config: Config = {
   collectCoverageFrom: ['src/**/*.ts', '!src/main.ts'],
   coverageDirectory: './coverage',
   testEnvironment: 'node',
-  moduleNameMapper: { '^@zanweb/shared$': '<rootDir>/../../packages/shared/src' },
+  setupFiles: ['<rootDir>/test/setup-env.ts'],
+  moduleNameMapper: {
+    '^@zanweb/shared$': '<rootDir>/../../packages/shared/src',
+    '^@zanweb/prisma/client$': '<rootDir>/../../packages/prisma/src/client',
+  },
 };
 export default config;
