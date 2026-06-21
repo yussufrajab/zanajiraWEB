@@ -191,6 +191,18 @@ importers:
         specifier: ^5.12.0
         version: 5.22.0(prisma@5.22.0)
     devDependencies:
+      '@types/bcrypt':
+        specifier: ^5.0.2
+        version: 5.0.2
+      '@types/node':
+        specifier: ^20.12.0
+        version: 20.19.43
+      bcrypt:
+        specifier: ^5.1.1
+        version: 5.1.1
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.4.5
       prisma:
         specifier: ^5.12.0
         version: 5.22.0
