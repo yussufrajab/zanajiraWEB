@@ -19,7 +19,13 @@ export class NewsController {
     @Query('q') q?: string,
     @Query('dateFrom') dateFrom?: string,
     @Query('dateTo') dateTo?: string,
+    @Query('status') status?: ContentStatus,
+    @Req() req?: any,
   ) {
+    const user = req?.user;
+    if (status && user && [UserRole.Editor, UserRole.Reviewer, UserRole.Administrator].includes(user.role)) {
+      return this.news.listAdmin({ page: Number(page), pageSize: Number(pageSize), status });
+    }
     return this.news.listPublic({ page: Number(page), pageSize: Number(pageSize), q, dateFrom, dateTo });
   }
 
@@ -46,8 +52,8 @@ export class NewsController {
   @Post(':id/transition')
   @UseGuards(RolesGuard)
   @Roles(UserRole.Editor, UserRole.Reviewer, UserRole.Administrator)
-  transition(@Param('id') id: string, @Body() body: { to: ContentStatus }, @Req() req: any) {
-    return this.news.transition(id, body.to, req.user);
+  transition(@Param('id') id: string, @Body() body: { to: ContentStatus; comment?: string }, @Req() req: any) {
+    return this.news.transition(id, body.to, req.user, body.comment);
   }
 
   @Get('by-id/:id')

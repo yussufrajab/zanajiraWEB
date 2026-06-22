@@ -57,11 +57,16 @@ export class NewsService {
     return updated;
   }
 
-  async transition(id: string, to: ContentStatus, user: { id: string; role: UserRole }) {
+  async transition(id: string, to: ContentStatus, user: { id: string; role: UserRole }, comment?: string) {
     const post = await this.findOneOrThrow(id);
     this.workflow.assertCanTransition(user.role, post.status as unknown as ContentStatus, to);
     const updated = await this.prisma.newsPost.update({ where: { id }, data: { status: to, reviewerId: user.id } });
-    await this.versions.snapshot({ entityType: 'NewsPost', entityId: id, data: { status: to } as any, authorId: user.id });
+    await this.versions.snapshot({
+      entityType: 'NewsPost',
+      entityId: id,
+      data: { status: to, comment: comment ?? null } as any,
+      authorId: user.id,
+    });
     const action = to === ContentStatus.Published ? AuditAction.Publish : to === ContentStatus.Rejected ? AuditAction.Reject : AuditAction.Update;
     await this.audit.log({ userId: user.id, action, entityType: 'NewsPost', entityId: id });
     await this.cache.invalidate('news:');
@@ -94,6 +99,15 @@ export class NewsService {
     const result = { items, total, page: args.page, pageSize: args.pageSize };
     await this.cache.set(cacheKey, result, 300);
     return result;
+  }
+
+  async listAdmin(args: { page: number; pageSize: number; status: ContentStatus }) {
+    const where: any = { status: args.status };
+    const [items, total] = await Promise.all([
+      this.prisma.newsPost.findMany({ where, orderBy: { publishDate: 'desc' }, skip: (args.page - 1) * args.pageSize, take: args.pageSize }),
+      this.prisma.newsPost.count({ where }),
+    ]);
+    return { items, total, page: args.page, pageSize: args.pageSize };
   }
 
   async getBySlug(slug: string) {

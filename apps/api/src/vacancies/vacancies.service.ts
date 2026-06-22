@@ -52,11 +52,16 @@ export class VacanciesService {
     return updated;
   }
 
-  async transition(id: string, to: VacancyStatus, user: { id: string; role: UserRole }) {
+  async transition(id: string, to: VacancyStatus, user: { id: string; role: UserRole }, comment?: string) {
     const v = await this.findOneOrThrow(id);
     this.workflow.assertCanTransition(user.role, v.status as unknown as ContentStatus, to as unknown as ContentStatus);
     const updated = await this.prisma.vacancy.update({ where: { id }, data: { status: to, reviewerId: user.id } });
-    await this.versions.snapshot({ entityType: 'Vacancy', entityId: id, data: { status: to } as any, authorId: user.id });
+    await this.versions.snapshot({
+      entityType: 'Vacancy',
+      entityId: id,
+      data: { status: to, comment: comment ?? null } as any,
+      authorId: user.id,
+    });
     const action = to === VacancyStatus.Published ? AuditAction.Publish : to === VacancyStatus.Archived ? AuditAction.Delete : AuditAction.Update;
     await this.audit.log({ userId: user.id, action, entityType: 'Vacancy', entityId: id });
     await this.cache.invalidate('vacancies:');
@@ -83,6 +88,15 @@ export class VacanciesService {
     const result = { items, total, page: args.page, pageSize: args.pageSize };
     await this.cache.set(cacheKey, result, 300);
     return result;
+  }
+
+  async listAdmin(args: { page: number; pageSize: number; status: VacancyStatus }) {
+    const where: any = { status: args.status };
+    const [items, total] = await Promise.all([
+      this.prisma.vacancy.findMany({ where, orderBy: { publishDate: 'desc' }, skip: (args.page - 1) * args.pageSize, take: args.pageSize }),
+      this.prisma.vacancy.count({ where }),
+    ]);
+    return { items, total, page: args.page, pageSize: args.pageSize };
   }
 
   async getBySlug(slug: string) {

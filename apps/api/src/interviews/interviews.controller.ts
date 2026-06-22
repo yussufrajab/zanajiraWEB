@@ -13,7 +13,12 @@ export class InterviewsController {
 
   @Public()
   @Get()
-  list(@Query() q: Record<string, string>) {
+  list(@Query() q: Record<string, string>, @Req() req: any) {
+    const status = q.status as ContentStatus | undefined;
+    const user = req?.user;
+    if (status && user && [UserRole.Editor, UserRole.Reviewer, UserRole.Administrator].includes(user.role)) {
+      return this.interviews.listAdmin({ page: Number(q.page ?? 1), pageSize: Number(q.pageSize ?? 10), status });
+    }
     return this.interviews.listPublic({
       page: Number(q.page ?? 1), pageSize: Number(q.pageSize ?? 10),
       type: q.type as InterviewType | undefined, mda: q.mda, q: q.q,
@@ -37,8 +42,8 @@ export class InterviewsController {
   @Post(':id/transition')
   @UseGuards(RolesGuard)
   @Roles(UserRole.Editor, UserRole.Reviewer, UserRole.Administrator)
-  transition(@Param('id') id: string, @Body() body: { to: ContentStatus }, @Req() req: any) {
-    return this.interviews.transition(id, body.to, req.user);
+  transition(@Param('id') id: string, @Body() body: { to: ContentStatus; comment?: string }, @Req() req: any) {
+    return this.interviews.transition(id, body.to, req.user, body.comment);
   }
 
   @Get('by-id/:id')

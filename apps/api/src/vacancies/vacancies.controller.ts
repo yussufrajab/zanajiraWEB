@@ -13,10 +13,15 @@ export class VacanciesController {
 
   @Public()
   @Get()
-  list(@Query() q: Record<string, string>) {
+  list(@Query() q: Record<string, string>, @Req() req: any) {
+    const status = q.status as VacancyStatus | undefined;
+    const user = req?.user;
+    if (status && user && [UserRole.Editor, UserRole.Reviewer, UserRole.Administrator].includes(user.role)) {
+      return this.vacancies.listAdmin({ page: Number(q.page ?? 1), pageSize: Number(q.pageSize ?? 10), status });
+    }
     return this.vacancies.listPublic({
       page: Number(q.page ?? 1), pageSize: Number(q.pageSize ?? 10),
-      mda: q.mda, status: q.status as VacancyStatus | undefined, q: q.q,
+      mda: q.mda, status, q: q.q,
     });
   }
 
@@ -37,8 +42,8 @@ export class VacanciesController {
   @Post(':id/transition')
   @UseGuards(RolesGuard)
   @Roles(UserRole.Editor, UserRole.Reviewer, UserRole.Administrator)
-  transition(@Param('id') id: string, @Body() body: { to: VacancyStatus }, @Req() req: any) {
-    return this.vacancies.transition(id, body.to, req.user);
+  transition(@Param('id') id: string, @Body() body: { to: VacancyStatus; comment?: string }, @Req() req: any) {
+    return this.vacancies.transition(id, body.to, req.user, body.comment);
   }
 
   @Get('by-id/:id')

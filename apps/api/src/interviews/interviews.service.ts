@@ -48,11 +48,16 @@ export class InterviewsService {
     return updated;
   }
 
-  async transition(id: string, to: ContentStatus, user: { id: string; role: UserRole }) {
+  async transition(id: string, to: ContentStatus, user: { id: string; role: UserRole }, comment?: string) {
     const n = await this.findOneOrThrow(id);
     this.workflow.assertCanTransition(user.role, n.status as unknown as ContentStatus, to);
     const updated = await this.prisma.interviewNotice.update({ where: { id }, data: { status: to, reviewerId: user.id } });
-    await this.versions.snapshot({ entityType: 'InterviewNotice', entityId: id, data: { status: to } as any, authorId: user.id });
+    await this.versions.snapshot({
+      entityType: 'InterviewNotice',
+      entityId: id,
+      data: { status: to, comment: comment ?? null } as any,
+      authorId: user.id,
+    });
     const action = to === ContentStatus.Published ? AuditAction.Publish : to === ContentStatus.Rejected ? AuditAction.Reject : AuditAction.Update;
     await this.audit.log({ userId: user.id, action, entityType: 'InterviewNotice', entityId: id });
     await this.cache.invalidate('interviews:');
@@ -78,6 +83,15 @@ export class InterviewsService {
     const result = { items, total, page: args.page, pageSize: args.pageSize };
     await this.cache.set(cacheKey, result, 300);
     return result;
+  }
+
+  async listAdmin(args: { page: number; pageSize: number; status: ContentStatus }) {
+    const where: any = { status: args.status };
+    const [items, total] = await Promise.all([
+      this.prisma.interviewNotice.findMany({ where, orderBy: { publishDate: 'desc' }, skip: (args.page - 1) * args.pageSize, take: args.pageSize }),
+      this.prisma.interviewNotice.count({ where }),
+    ]);
+    return { items, total, page: args.page, pageSize: args.pageSize };
   }
 
   async getBySlug(slug: string) {
