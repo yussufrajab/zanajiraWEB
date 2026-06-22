@@ -17,6 +17,7 @@ import { PagesModule } from './pages/pages.module';
 import { QueueModule } from './queue/queue.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { SubscribersModule } from './subscribers/subscribers.module';
+import { AnalyticsModule } from './analytics/analytics.module';
 import { DepartmentsModule } from './departments/departments.module';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 
@@ -32,6 +33,7 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard';
     QueueModule,
     NotificationsModule,
     SubscribersModule,
+    AnalyticsModule,
     ContentModule,
     NewsModule,
     VacanciesModule,
