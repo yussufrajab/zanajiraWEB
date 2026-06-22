@@ -14,6 +14,7 @@ import { VacanciesModule } from './vacancies/vacancies.module';
 import { InterviewsModule } from './interviews/interviews.module';
 import { SearchModule } from './search/search.module';
 import { PagesModule } from './pages/pages.module';
+import { QueueModule } from './queue/queue.module';
 import { DepartmentsModule } from './departments/departments.module';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 
@@ -26,6 +27,7 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard';
     UsersModule,
     DocumentsModule,
     CacheModule,
+    QueueModule,
     ContentModule,
     NewsModule,
     VacanciesModule,
