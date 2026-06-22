@@ -12,6 +12,7 @@ import { ContentModule } from './content/content.module';
 import { NewsModule } from './news/news.module';
 import { VacanciesModule } from './vacancies/vacancies.module';
 import { InterviewsModule } from './interviews/interviews.module';
+import { SearchModule } from './search/search.module';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 
 @Module({
@@ -27,6 +28,7 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard';
     NewsModule,
     VacanciesModule,
     InterviewsModule,
+    SearchModule,
   ],
   controllers: [HealthController],
   providers: [{ provide: APP_GUARD, useClass: JwtAuthGuard }],
