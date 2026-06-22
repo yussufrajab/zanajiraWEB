@@ -38,6 +38,34 @@ async function main() {
     }
   }
 
+  const defaultPages = [
+    { slug: 'about', titleSw: 'Kuhutu Sisi', titleEn: 'About Us', bodySw: '', bodyEn: '' },
+    { slug: 'about/introduction', titleSw: 'Utangulizi', titleEn: 'Introduction', bodySw: '', bodyEn: '', parentSlug: 'about' },
+    { slug: 'about/mission-vision', titleSw: 'Dhamira na Maono', titleEn: 'Mission & Vision', bodySw: '', bodyEn: '', parentSlug: 'about' },
+    { slug: 'about/core-functions', titleSw: 'Kazi Kuu', titleEn: 'Core Functions', bodySw: '', bodyEn: '', parentSlug: 'about' },
+    { slug: 'organization', titleSw: 'Muundo wa Shirika', titleEn: 'Organization Structure', bodySw: '', bodyEn: '' },
+    { slug: 'organization/board', titleSw: 'Bodi', titleEn: 'Board', bodySw: '', bodyEn: '', parentSlug: 'organization' },
+    { slug: 'organization/department', titleSw: 'Idara', titleEn: 'Department', bodySw: '', bodyEn: '', parentSlug: 'organization' },
+    { slug: 'organization/unit-division', titleSw: 'Kitengo & Tawi', titleEn: 'Unit & Division', bodySw: '', bodyEn: '', parentSlug: 'organization' },
+    { slug: 'organization/chart', titleSw: 'Chatu ya Shirika', titleEn: 'Organization Chart', bodySw: '', bodyEn: '', parentSlug: 'organization' },
+    { slug: 'services', titleSw: 'Huduma Zetu', titleEn: 'Our Services', bodySw: '', bodyEn: '' },
+    { slug: 'contact', titleSw: 'Wasiliana Nasi', titleEn: 'Contact Us', bodySw: '', bodyEn: '' },
+  ];
+
+  for (const p of defaultPages) {
+    let parentId: string | null = null;
+    if (p.parentSlug) {
+      const parent = await prisma.page.findUnique({ where: { slug: p.parentSlug } });
+      parentId = parent?.id ?? null;
+    }
+    await prisma.page.upsert({
+      where: { slug: p.slug },
+      update: {},
+      create: { slug: p.slug, titleSw: p.titleSw, titleEn: p.titleEn, bodySw: p.bodySw, bodyEn: p.bodyEn, parentId },
+    });
+  }
+  console.log('Default pages seeded.');
+
   console.log('Seed complete. Admin id:', admin.id);
 }
 
