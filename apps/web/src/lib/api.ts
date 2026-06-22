@@ -10,14 +10,26 @@ async function get<T>(path: string): Promise<T> {
   return res.json() as Promise<T>;
 }
 
+function qs(params: Record<string, string | number | undefined>): string {
+  const usp = new URLSearchParams();
+  for (const [k, v] of Object.entries(params)) {
+    if (v !== undefined && v !== '') usp.set(k, String(v));
+  }
+  const s = usp.toString();
+  return s ? `?${s}` : '';
+}
+
 export const api = {
-  newsList: (page = 1) => get<Paginated<NewsPostResponse>>(`/news?page=${page}`),
+  newsList: (p: { page?: number; q?: string; dateFrom?: string; dateTo?: string } = {}) =>
+    get<Paginated<NewsPostResponse>>(`/news${qs({ page: p.page ?? 1, q: p.q, dateFrom: p.dateFrom, dateTo: p.dateTo })}`),
   newsBySlug: (slug: string) => get<NewsPostResponse>(`/news/by-slug/${slug}`),
-  vacancyList: (page = 1, mda?: string) => get<Paginated<VacancyResponse>>(`/vacancies?page=${page}${mda ? `&mda=${mda}` : ''}`),
+  vacancyList: (p: { page?: number; mda?: string; status?: string } = {}) =>
+    get<Paginated<VacancyResponse>>(`/vacancies${qs({ page: p.page ?? 1, mda: p.mda, status: p.status })}`),
   vacancyBySlug: (slug: string) => get<VacancyResponse>(`/vacancies/by-slug/${slug}`),
-  interviewList: (page = 1, type?: string) => get<Paginated<InterviewNoticeResponse>>(`/interviews?page=${page}${type ? `&type=${type}` : ''}`),
+  interviewList: (p: { page?: number; type?: string } = {}) =>
+    get<Paginated<InterviewNoticeResponse>>(`/interviews${qs({ page: p.page ?? 1, type: p.type })}`),
   interviewBySlug: (slug: string) => get<InterviewNoticeResponse>(`/interviews/by-slug/${slug}`),
   pageBySlug: (slug: string) => get<PageResponse>(`/pages/by-slug/${slug}`),
   pageTree: () => get<PageResponse[]>(`/pages/tree`),
-  search: (q: string) => get<{ id: string; type: string; slug: string; title: string }[]>(`/search?q=${encodeURIComponent(q)}`),
+  search: (q: string) => get<{ id: string; type: string; slug: string; title: string }[]>(`/search${qs({ q })}`),
 };

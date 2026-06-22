@@ -8,8 +8,8 @@ export default async function Home({ params: { locale } }: { params: { locale: s
   const t = useTranslations('Home');
   // SSR fetch of latest news + vacancies; degrade gracefully if the API is unreachable.
   const [news, vacancies] = await Promise.all([
-    api.newsList(1).catch(() => ({ items: [] as Awaited<ReturnType<typeof api.newsList>>['items'], total: 0, page: 1, pageSize: 10 })),
-    api.vacancyList(1).catch(() => ({ items: [] as Awaited<ReturnType<typeof api.vacancyList>>['items'], total: 0, page: 1, pageSize: 10 })),
+    api.newsList({ page: 1 }).catch(() => ({ items: [] as Awaited<ReturnType<typeof api.newsList>>['items'], total: 0, page: 1, pageSize: 10 })),
+    api.vacancyList({ page: 1 }).catch(() => ({ items: [] as Awaited<ReturnType<typeof api.vacancyList>>['items'], total: 0, page: 1, pageSize: 10 })),
   ]);
   const titleFor = (sw: string, en: string | null) => (locale === 'en' && en ? en : sw);
   return (
