@@ -1,8 +1,9 @@
 {
+  "Site": { "name": "Tume ya Utumishi wa Umma – Zanzibar" },
   "Home": { "title": "Tume ya Utumishi wa Umma – Zanzibar", "welcome": "Karibu kwenye tovuti rasmi ya Tume ya Utumishi wa Umma Zanzibar.", "latestNews": "Habari Mpya", "latestVacancies": "Tangazo la Nafasi za Kazi" },
   "Nav": { "about": "Kuhusu Sisi", "organization": "Muundo wa Shirika", "services": "Huduma Zetu", "contact": "Wasiliana Nasi", "news": "Habari", "vacancies": "Tangazo la Nafasi za Kazi", "interviews": "Wito wa Usaili", "search": "Tafuta", "externalLinks": "Viungo vya Nje", "staffServices": "Huduma za Wafanyakazi" },
   "Lang": { "switch": "English" },
-  "Common": { "publishedOn": "Imechapishwa", "closingDate": "Tarehe ya Mwisho", "closed": "Imefungwa", "open": "Wazi", "download": "Pakua", "notTranslated": "Haijatafsiriwa bado", "readMore": "Soma Zaidi", "searchPlaceholder": "Tafuta tovuti...", "searchResults": "Matokeo ya Utafutaji", "noResults": "Hakuna matokeo", "applyHere": "Omba Hapa" },
+  "Common": { "publishedOn": "Imechapishwa", "closingDate": "Tarehe ya Mwisho", "closed": "Imefungwa", "open": "Wazi", "download": "Pakua", "notTranslated": "Haijatafsiriwa bado", "readMore": "Soma Zaidi", "search": "Tafuta", "searchPlaceholder": "Tafuta tovuti...", "searchResults": "Matokeo ya Utafutaji", "noResults": "Hakuna matokeo", "applyHere": "Omba Hapa", "documents": "Nyaraka" },
   "Contact": { "address": "Anuani", "phone": "Simu", "email": "Barua Pepe", "map": "Ramani" },
   "External": { "zanajiraPortal": "Lango la Maombi la ZanAjira", "nationalAjira": "Lango la Ajira Taifa", "eOffice": "e-Office", "hrms": "HRMS", "staffMail": "Barua Pepe ya Wafanyakazi", "salaryClaim": "Daawa ya Mshahara", "ikulu": "Ikulu Zanzibar", "egaz": "eGAZ", "zaeca": "ZAECA", "zpsc": "ZPSC", "ipa": "IPA" }
 }
