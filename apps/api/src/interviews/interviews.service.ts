@@ -4,6 +4,7 @@ import { WorkflowService } from '../content/workflow.service';
 import { ContentVersionService } from '../content/content-version.service';
 import { CacheService } from '../cache/cache.service';
 import { AuditService } from '../audit/audit.service';
+import { DocumentsService } from '../documents/documents.service';
 import { AuditAction, ContentStatus, InterviewType, UserRole } from '@zanweb/shared';
 import { slugify, uniqueSlug } from '../common/slug.util';
 
@@ -15,6 +16,7 @@ export class InterviewsService {
     private versions: ContentVersionService,
     private cache: CacheService,
     private audit: AuditService,
+    private docs: DocumentsService,
   ) {}
 
   async create(dto: any, user: { id: string; role: UserRole }) {
@@ -24,9 +26,13 @@ export class InterviewsService {
       data: {
         slug, title: dto.title, mda: dto.mda, type: dto.type, departmentId: dto.departmentId ?? null,
         publishDate: dto.publishDate ? new Date(dto.publishDate) : new Date(),
+        scheduledPublishAt: dto.scheduledPublishAt ? new Date(dto.scheduledPublishAt) : null,
         status: ContentStatus.Draft, authorId: user.id,
       },
     });
+    if (dto.documentIds?.length) {
+      await this.docs.attachDocuments('InterviewNotice', n.id, dto.documentIds);
+    }
     await this.versions.snapshot({ entityType: 'InterviewNotice', entityId: n.id, data: n as any, authorId: user.id });
     await this.audit.log({ userId: user.id, action: AuditAction.Create, entityType: 'InterviewNotice', entityId: n.id });
     return n;
@@ -34,7 +40,8 @@ export class InterviewsService {
 
   async update(id: string, dto: any, user: { id: string; role: UserRole }) {
     await this.findOneOrThrow(id);
-    const updated = await this.prisma.interviewNotice.update({ where: { id }, data: dto });
+    const { documentIds, ...rest } = dto;
+    const updated = await this.prisma.interviewNotice.update({ where: { id }, data: rest });
     await this.versions.snapshot({ entityType: 'InterviewNotice', entityId: id, data: updated as any, authorId: user.id });
     await this.audit.log({ userId: user.id, action: AuditAction.Update, entityType: 'InterviewNotice', entityId: id });
     await this.cache.invalidate('interviews:');

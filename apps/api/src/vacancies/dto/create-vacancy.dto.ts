@@ -1,4 +1,4 @@
-import { IsDateString, IsOptional, IsString, IsUrl, MinLength, MaxLength } from 'class-validator';
+import { IsArray, IsDateString, IsOptional, IsString, IsUrl, MinLength, MaxLength } from 'class-validator';
 
 export class CreateVacancyDto {
   @IsString() @MinLength(3) @MaxLength(300) title!: string;
@@ -7,4 +7,6 @@ export class CreateVacancyDto {
   @IsOptional() @IsDateString() publishDate?: string;
   @IsOptional() @IsUrl() applyUrl?: string;
   @IsOptional() @IsString() departmentId?: string;
+  @IsOptional() @IsArray() documentIds?: string[];
+  @IsOptional() @IsDateString() scheduledPublishAt?: string;
 }

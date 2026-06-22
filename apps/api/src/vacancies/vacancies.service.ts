@@ -4,6 +4,7 @@ import { WorkflowService } from '../content/workflow.service';
 import { ContentVersionService } from '../content/content-version.service';
 import { CacheService } from '../cache/cache.service';
 import { AuditService } from '../audit/audit.service';
+import { DocumentsService } from '../documents/documents.service';
 import { AuditAction, ContentStatus, UserRole, VacancyStatus } from '@zanweb/shared';
 import { slugify, uniqueSlug } from '../common/slug.util';
 
@@ -15,6 +16,7 @@ export class VacanciesService {
     private versions: ContentVersionService,
     private cache: CacheService,
     private audit: AuditService,
+    private docs: DocumentsService,
   ) {}
 
   async create(dto: any, user: { id: string; role: UserRole }) {
@@ -25,9 +27,13 @@ export class VacanciesService {
         slug, title: dto.title, mda: dto.mda, departmentId: dto.departmentId ?? null,
         publishDate: dto.publishDate ? new Date(dto.publishDate) : new Date(),
         closingDate: new Date(dto.closingDate),
+        scheduledPublishAt: dto.scheduledPublishAt ? new Date(dto.scheduledPublishAt) : null,
         applyUrl: dto.applyUrl ?? null, status: VacancyStatus.Draft, authorId: user.id,
       },
     });
+    if (dto.documentIds?.length) {
+      await this.docs.attachDocuments('Vacancy', v.id, dto.documentIds);
+    }
     await this.versions.snapshot({ entityType: 'Vacancy', entityId: v.id, data: v as any, authorId: user.id });
     await this.audit.log({ userId: user.id, action: AuditAction.Create, entityType: 'Vacancy', entityId: v.id });
     return v;
@@ -35,9 +41,10 @@ export class VacanciesService {
 
   async update(id: string, dto: any, user: { id: string; role: UserRole }) {
     await this.findOneOrThrow(id);
+    const { documentIds, ...rest } = dto;
     const updated = await this.prisma.vacancy.update({
       where: { id },
-      data: { ...dto, closingDate: dto.closingDate ? new Date(dto.closingDate) : undefined },
+      data: { ...rest, closingDate: dto.closingDate ? new Date(dto.closingDate) : undefined },
     });
     await this.versions.snapshot({ entityType: 'Vacancy', entityId: id, data: updated as any, authorId: user.id });
     await this.audit.log({ userId: user.id, action: AuditAction.Update, entityType: 'Vacancy', entityId: id });

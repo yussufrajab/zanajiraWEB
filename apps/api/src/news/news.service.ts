@@ -30,11 +30,15 @@ export class NewsService {
         bodySw: dto.bodySw,
         bodyEn: dto.bodyEn ?? null,
         publishDate: dto.publishDate ? new Date(dto.publishDate) : new Date(),
+        scheduledPublishAt: dto.scheduledPublishAt ? new Date(dto.scheduledPublishAt) : null,
         coverImageKey: dto.coverImageKey ?? null,
         status: ContentStatus.Draft,
         authorId: user.id,
       },
     });
+    if (dto.documentIds?.length) {
+      await this.docs.attachDocuments('NewsPost', post.id, dto.documentIds);
+    }
     await this.versions.snapshot({ entityType: 'NewsPost', entityId: post.id, data: post as any, authorId: user.id });
     await this.audit.log({ userId: user.id, action: AuditAction.Create, entityType: 'NewsPost', entityId: post.id });
     return post;
@@ -42,9 +46,10 @@ export class NewsService {
 
   async update(id: string, dto: any, user: { id: string; role: UserRole }) {
     await this.findOneOrThrow(id);
+    const { documentIds, ...rest } = dto;
     const updated = await this.prisma.newsPost.update({
       where: { id },
-      data: { ...dto, bodyEn: dto.bodyEn ?? null, titleEn: dto.titleEn ?? null },
+      data: { ...rest, bodyEn: dto.bodyEn ?? null, titleEn: dto.titleEn ?? null },
     });
     await this.versions.snapshot({ entityType: 'NewsPost', entityId: id, data: updated as any, authorId: user.id });
     await this.audit.log({ userId: user.id, action: AuditAction.Update, entityType: 'NewsPost', entityId: id });

@@ -104,6 +104,7 @@ model NewsPost {
   bodySw        String
   bodyEn        String?
   publishDate   DateTime       @default(now())
+  scheduledPublishAt DateTime?
   status        ContentStatus  @default(Draft)
   coverImageKey String?
   authorId      String
@@ -126,6 +127,7 @@ model Vacancy {
   departmentId  String?
   department    Department?    @relation("VacancyDepartment", fields: [departmentId], references: [id])
   publishDate   DateTime       @default(now())
+  scheduledPublishAt DateTime?
   closingDate   DateTime
   status        VacancyStatus  @default(Draft)
   applyUrl      String?
@@ -151,6 +153,7 @@ model InterviewNotice {
   departmentId  String?
   department    Department?    @relation("InterviewDepartment", fields: [departmentId], references: [id])
   publishDate   DateTime       @default(now())
+  scheduledPublishAt DateTime?
   status        ContentStatus  @default(Draft)
   authorId      String
   author        User           @relation("InterviewAuthor", fields: [authorId], references: [id])

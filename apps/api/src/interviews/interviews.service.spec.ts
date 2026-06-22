@@ -5,6 +5,7 @@ import { WorkflowService } from '../content/workflow.service';
 import { ContentVersionService } from '../content/content-version.service';
 import { CacheService } from '../cache/cache.service';
 import { AuditService } from '../audit/audit.service';
+import { DocumentsService } from '../documents/documents.service';
 import { ContentStatus, InterviewType, UserRole } from '@zanweb/shared';
 import { ForbiddenException } from '@nestjs/common';
 
@@ -22,6 +23,7 @@ describe('InterviewsService', () => {
   const versions = { snapshot: jest.fn().mockResolvedValue({}), history: jest.fn().mockResolvedValue([]) };
   const cache = { invalidate: jest.fn().mockResolvedValue(undefined), get: jest.fn().mockResolvedValue(null), set: jest.fn().mockResolvedValue(undefined) };
   const audit = { log: jest.fn().mockResolvedValue({}) };
+  const docs = { attachDocuments: jest.fn().mockResolvedValue({}) };
   let service: InterviewsService;
   const user = { id: 'u1', role: UserRole.Editor };
 
@@ -35,6 +37,7 @@ describe('InterviewsService', () => {
         { provide: ContentVersionService, useValue: versions },
         { provide: CacheService, useValue: cache },
         { provide: AuditService, useValue: audit },
+        { provide: DocumentsService, useValue: docs },
       ],
     }).compile();
     service = moduleRef.get(InterviewsService);

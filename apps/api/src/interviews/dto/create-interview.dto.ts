@@ -1,4 +1,4 @@
-import { IsDateString, IsEnum, IsOptional, IsString, MinLength, MaxLength } from 'class-validator';
+import { IsArray, IsDateString, IsEnum, IsOptional, IsString, MinLength, MaxLength } from 'class-validator';
 import { InterviewType } from '@zanweb/shared';
 
 export class CreateInterviewDto {
@@ -7,4 +7,6 @@ export class CreateInterviewDto {
   @IsEnum(InterviewType) type!: InterviewType;
   @IsOptional() @IsDateString() publishDate?: string;
   @IsOptional() @IsString() departmentId?: string;
+  @IsOptional() @IsArray() documentIds?: string[];
+  @IsOptional() @IsDateString() scheduledPublishAt?: string;
 }
