@@ -1,5 +1,8 @@
 {
-  "Home": { "title": "Civil Service Commission – Zanzibar", "welcome": "Welcome to the official website of the Civil Service Commission of Zanzibar." },
-  "Nav": { "about": "About Us", "organization": "Organization Structure", "services": "Our Services", "contact": "Contact Us", "news": "News", "vacancies": "Vacancy Announcements", "interviews": "Call for Interviews", "search": "Search" },
-  "Lang": { "switch": "Kiswahili" }
+  "Home": { "title": "Civil Service Commission – Zanzibar", "welcome": "Welcome to the official website of the Civil Service Commission of Zanzibar.", "latestNews": "Latest News", "latestVacancies": "Vacancy Announcements" },
+  "Nav": { "about": "About Us", "organization": "Organization Structure", "services": "Our Services", "contact": "Contact Us", "news": "News", "vacancies": "Vacancy Announcements", "interviews": "Call for Interviews", "search": "Search", "externalLinks": "External Links", "staffServices": "Staff Services" },
+  "Lang": { "switch": "Kiswahili" },
+  "Common": { "publishedOn": "Published on", "closingDate": "Closing Date", "closed": "Closed", "open": "Open", "download": "Download", "notTranslated": "Not yet translated", "readMore": "Read More", "searchPlaceholder": "Search the site...", "searchResults": "Search Results", "noResults": "No results", "applyHere": "Apply Here" },
+  "Contact": { "address": "Address", "phone": "Phone", "email": "Email", "map": "Map" },
+  "External": { "zanajiraPortal": "ZanAjira Application Portal", "nationalAjira": "National Ajira Portal", "eOffice": "e-Office", "hrms": "HRMS", "staffMail": "Staff Email", "salaryClaim": "Salary Claim", "ikulu": "State House Zanzibar", "egaz": "eGAZ", "zaeca": "ZAECA", "zpsc": "ZPSC", "ipa": "IPA" }
 }
