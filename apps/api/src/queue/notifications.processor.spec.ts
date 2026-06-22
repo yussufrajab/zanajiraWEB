@@ -1,6 +1,7 @@
 import { NotificationsProcessor } from './notifications.processor';
 import { MailService } from '../notifications/mail.service';
 import { PrismaService } from '../prisma/prisma.service';
+import { ConfigService } from '@nestjs/config';
 import { Job } from 'bullmq';
 
 describe('NotificationsProcessor', () => {
@@ -10,13 +11,16 @@ describe('NotificationsProcessor', () => {
     vacancy: { findUnique: jest.fn() },
     interviewNotice: { findUnique: jest.fn() },
     user: { findMany: jest.fn(), findUnique: jest.fn() },
+    subscriber: { findMany: jest.fn() },
   } as unknown as PrismaService;
+
+  const config = { get: jest.fn() } as unknown as ConfigService;
 
   let processor: NotificationsProcessor;
 
   beforeEach(() => {
     jest.clearAllMocks();
-    processor = new NotificationsProcessor(mail as unknown as MailService, prisma);
+    processor = new NotificationsProcessor(mail as unknown as MailService, prisma, config);
   });
 
   const makeJob = (data: any) => ({ data } as Job);
@@ -60,6 +64,32 @@ describe('NotificationsProcessor', () => {
 
     await processor.process(makeJob({ kind: 'submitted', entityType: 'InterviewNotice', entityId: 'i1', actorId: 'u1' }));
 
+    expect(mail.send).not.toHaveBeenCalled();
+  });
+
+  it('emails matching subscribers when a new vacancy is published and feature is enabled', async () => {
+    (config.get as jest.Mock).mockReturnValue('true');
+    prisma.vacancy.findUnique = jest.fn().mockResolvedValue({ id: 'v1', title: 'Nafasi za Kazi', mda: 'Wizara', authorId: 'u1' });
+    prisma.subscriber.findMany = jest.fn().mockResolvedValue([
+      { email: 'a@example.com', criteria: { mda: 'Wizara' } },
+      { email: 'b@example.com', criteria: { keywords: ['kazi'] } },
+      { email: 'c@example.com', criteria: { mda: 'Other' } },
+    ]);
+
+    await processor.process(makeJob({ kind: 'newVacancy', entityType: 'Vacancy', entityId: 'v1', actorId: 'u1' }));
+
+    expect(mail.send).toHaveBeenCalledTimes(2);
+    expect(mail.send).toHaveBeenCalledWith('a@example.com', expect.stringContaining('New vacancy'), expect.any(String));
+    expect(mail.send).toHaveBeenCalledWith('b@example.com', expect.stringContaining('New vacancy'), expect.any(String));
+  });
+
+  it('skips subscriber emails when feature is disabled', async () => {
+    (config.get as jest.Mock).mockReturnValue(undefined);
+    prisma.vacancy.findUnique = jest.fn().mockResolvedValue({ id: 'v1', title: 'Nafasi', mda: 'Wizara', authorId: 'u1' });
+
+    await processor.process(makeJob({ kind: 'newVacancy', entityType: 'Vacancy', entityId: 'v1', actorId: 'u1' }));
+
+    expect(prisma.subscriber.findMany).not.toHaveBeenCalled();
     expect(mail.send).not.toHaveBeenCalled();
   });
 });

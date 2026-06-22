@@ -70,6 +70,9 @@ export class VacanciesService {
     await this.audit.log({ userId: user.id, action, entityType: 'Vacancy', entityId: id });
     const kind = to === VacancyStatus.InReview ? 'submitted' : to === VacancyStatus.Published ? 'published' : 'approved';
     await this.notificationsQueue.add('notify', { kind, entityType: 'Vacancy', entityId: id, actorId: user.id });
+    if (to === VacancyStatus.Published) {
+      await this.notificationsQueue.add('notify', { kind: 'newVacancy', entityType: 'Vacancy', entityId: id, actorId: user.id });
+    }
     await this.cache.invalidate('vacancies:');
     return updated;
   }
