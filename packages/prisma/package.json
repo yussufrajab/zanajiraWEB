@@ -2,11 +2,11 @@
   "name": "@zanweb/prisma",
   "version": "0.1.0",
   "private": true,
-  "main": "./src/client.ts",
-  "types": "./src/client.ts",
+  "main": "./dist/client.js",
+  "types": "./dist/client.d.ts",
   "exports": {
-    ".": "./src/client.ts",
-    "./client": "./src/client.ts"
+    ".": "./dist/client.js",
+    "./client": "./dist/client.js"
   },
   "scripts": {
     "prisma:generate": "prisma generate",
@@ -14,6 +14,7 @@
     "prisma:deploy": "prisma migrate deploy",
     "prisma:seed": "tsx seed.ts",
     "postinstall": "prisma generate",
+    "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

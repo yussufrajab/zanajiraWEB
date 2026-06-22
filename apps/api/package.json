@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nest start --watch",
+    "dev": "pnpm build && node dist/apps/api/src/main.js",
     "build": "nest build",
-    "start": "node dist/main.js",
+    "start": "node dist/apps/api/src/main.js",
     "test": "jest",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "lint": "eslint \"src/**/*.ts\"",

@@ -16,6 +16,14 @@ out/
 
 # prisma generated (committed selectively)
 packages/prisma/generated/
+packages/prisma/src/*.js
+packages/prisma/src/*.d.ts
+packages/prisma/src/*.js.map
+
+# shared package build artifacts (built to dist/)
+packages/shared/src/*.js
+packages/shared/src/*.d.ts
+packages/shared/src/*.js.map
 
 # misc
 *.log
