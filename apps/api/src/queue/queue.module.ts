@@ -1,6 +1,7 @@
 import { Module, Global } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { BullModule } from '@nestjs/bullmq';
+import { NotificationsProcessor } from './notifications.processor';
 
 @Global()
 @Module({
@@ -16,7 +17,7 @@ import { BullModule } from '@nestjs/bullmq';
       { name: 'pdf-thumbnail' },
     ),
   ],
-  providers: [],
+  providers: [NotificationsProcessor],
   exports: [BullModule],
 })
 export class QueueModule {}

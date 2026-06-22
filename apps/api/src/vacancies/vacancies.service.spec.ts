@@ -1,5 +1,7 @@
 import { Test } from '@nestjs/testing';
+import { getQueueToken } from '@nestjs/bullmq';
 import { VacanciesService } from './vacancies.service';
+import { QUEUES } from '../queue/queue.constants';
 import { PrismaService } from '../prisma/prisma.service';
 import { WorkflowService } from '../content/workflow.service';
 import { ContentVersionService } from '../content/content-version.service';
@@ -25,6 +27,7 @@ describe('VacanciesService', () => {
   const cache = { invalidate: jest.fn().mockResolvedValue(undefined), get: jest.fn().mockResolvedValue(null), set: jest.fn().mockResolvedValue(undefined) };
   const audit = { log: jest.fn().mockResolvedValue({}) };
   const docs = { attachDocuments: jest.fn().mockResolvedValue({}) };
+  const notificationsQueue = { add: jest.fn().mockResolvedValue({}) };
   let service: VacanciesService;
   const user = { id: 'u1', role: UserRole.Editor };
 
@@ -38,6 +41,7 @@ describe('VacanciesService', () => {
         { provide: CacheService, useValue: cache },
         { provide: AuditService, useValue: audit },
         { provide: DocumentsService, useValue: docs },
+        { provide: getQueueToken(QUEUES.notifications), useValue: notificationsQueue },
       ],
     }).compile();
     service = moduleRef.get(VacanciesService);

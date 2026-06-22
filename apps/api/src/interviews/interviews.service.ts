@@ -1,4 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectQueue } from '@nestjs/bullmq';
+import { Queue } from 'bullmq';
 import { PrismaService } from '../prisma/prisma.service';
 import { WorkflowService } from '../content/workflow.service';
 import { ContentVersionService } from '../content/content-version.service';
@@ -7,6 +9,7 @@ import { AuditService } from '../audit/audit.service';
 import { DocumentsService } from '../documents/documents.service';
 import { AuditAction, ContentStatus, InterviewType, UserRole } from '@zanweb/shared';
 import { slugify, uniqueSlug } from '../common/slug.util';
+import { QUEUES } from '../queue/queue.constants';
 
 @Injectable()
 export class InterviewsService {
@@ -17,6 +20,7 @@ export class InterviewsService {
     private cache: CacheService,
     private audit: AuditService,
     private docs: DocumentsService,
+    @InjectQueue(QUEUES.notifications) private notificationsQueue: Queue,
   ) {}
 
   async create(dto: any, user: { id: string; role: UserRole }) {
@@ -60,6 +64,8 @@ export class InterviewsService {
     });
     const action = to === ContentStatus.Published ? AuditAction.Publish : to === ContentStatus.Rejected ? AuditAction.Reject : AuditAction.Update;
     await this.audit.log({ userId: user.id, action, entityType: 'InterviewNotice', entityId: id });
+    const kind = to === ContentStatus.InReview ? 'submitted' : to === ContentStatus.Published ? 'published' : to === ContentStatus.Rejected ? 'rejected' : 'approved';
+    await this.notificationsQueue.add('notify', { kind, entityType: 'InterviewNotice', entityId: id, actorId: user.id });
     await this.cache.invalidate('interviews:');
     return updated;
   }

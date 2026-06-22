@@ -1,5 +1,7 @@
 import { Test } from '@nestjs/testing';
+import { getQueueToken } from '@nestjs/bullmq';
 import { NewsService } from './news.service';
+import { QUEUES } from '../queue/queue.constants';
 import { PrismaService } from '../prisma/prisma.service';
 import { WorkflowService } from '../content/workflow.service';
 import { ContentVersionService } from '../content/content-version.service';
@@ -24,6 +26,7 @@ describe('NewsService', () => {
   const cache = { invalidate: jest.fn().mockResolvedValue(undefined), get: jest.fn().mockResolvedValue(null), set: jest.fn().mockResolvedValue(undefined) };
   const audit = { log: jest.fn().mockResolvedValue({}) };
   const docs = { listForOwner: jest.fn().mockResolvedValue([]), attachDocuments: jest.fn().mockResolvedValue({}) };
+  const notificationsQueue = { add: jest.fn().mockResolvedValue({}) };
   let service: NewsService;
   const user = { id: 'u1', role: UserRole.Editor };
 
@@ -37,6 +40,7 @@ describe('NewsService', () => {
         { provide: CacheService, useValue: cache },
         { provide: AuditService, useValue: audit },
         { provide: DocumentsService, useValue: docs },
+        { provide: getQueueToken(QUEUES.notifications), useValue: notificationsQueue },
       ],
     }).compile();
     service = moduleRef.get(NewsService);
@@ -66,6 +70,18 @@ describe('NewsService', () => {
     prisma.newsPost.findUnique.mockResolvedValue({ id: 'n1', status: ContentStatus.Draft, authorId: 'u1' });
     await expect(service.transition('n1', ContentStatus.Published, { id: 'u1', role: UserRole.Administrator }))
       .rejects.toThrow(BadRequestException);
+  });
+
+  it('transition enqueues a submitted notification', async () => {
+    prisma.newsPost.findUnique.mockResolvedValue({ id: 'n1', status: ContentStatus.Draft, authorId: 'u1' });
+    prisma.newsPost.update.mockResolvedValue({ id: 'n1', status: ContentStatus.InReview });
+    await service.transition('n1', ContentStatus.InReview, user);
+    expect(notificationsQueue.add).toHaveBeenCalledWith('notify', {
+      kind: 'submitted',
+      entityType: 'NewsPost',
+      entityId: 'n1',
+      actorId: 'u1',
+    });
   });
 
   it('listPublic returns cached result when present', async () => {

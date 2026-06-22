@@ -1,4 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectQueue } from '@nestjs/bullmq';
+import { Queue } from 'bullmq';
 import { PrismaService } from '../prisma/prisma.service';
 import { WorkflowService } from '../content/workflow.service';
 import { ContentVersionService } from '../content/content-version.service';
@@ -7,6 +9,7 @@ import { AuditService } from '../audit/audit.service';
 import { DocumentsService } from '../documents/documents.service';
 import { AuditAction, ContentStatus, UserRole, VacancyStatus } from '@zanweb/shared';
 import { slugify, uniqueSlug } from '../common/slug.util';
+import { QUEUES } from '../queue/queue.constants';
 
 @Injectable()
 export class VacanciesService {
@@ -17,6 +20,7 @@ export class VacanciesService {
     private cache: CacheService,
     private audit: AuditService,
     private docs: DocumentsService,
+    @InjectQueue(QUEUES.notifications) private notificationsQueue: Queue,
   ) {}
 
   async create(dto: any, user: { id: string; role: UserRole }) {
@@ -64,6 +68,8 @@ export class VacanciesService {
     });
     const action = to === VacancyStatus.Published ? AuditAction.Publish : to === VacancyStatus.Archived ? AuditAction.Delete : AuditAction.Update;
     await this.audit.log({ userId: user.id, action, entityType: 'Vacancy', entityId: id });
+    const kind = to === VacancyStatus.InReview ? 'submitted' : to === VacancyStatus.Published ? 'published' : 'approved';
+    await this.notificationsQueue.add('notify', { kind, entityType: 'Vacancy', entityId: id, actorId: user.id });
     await this.cache.invalidate('vacancies:');
     return updated;
   }
