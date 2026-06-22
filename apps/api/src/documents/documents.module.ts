@@ -7,6 +7,6 @@ import { MalwareScannerService } from './malware-scanner.service';
 @Module({
   controllers: [DocumentsController],
   providers: [DocumentsService, StorageService, MalwareScannerService],
-  exports: [DocumentsService],
+  exports: [DocumentsService, StorageService],
 })
 export class DocumentsModule {}

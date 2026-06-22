@@ -2,14 +2,17 @@ import { Module, Global } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { BullModule } from '@nestjs/bullmq';
 import { VacanciesModule } from '../vacancies/vacancies.module';
+import { DocumentsModule } from '../documents/documents.module';
 import { NotificationsProcessor } from './notifications.processor';
 import { VacancyExpiryProcessor } from './vacancy-expiry.processor';
+import { PdfThumbnailProcessor } from './pdf-thumbnail.processor';
 import { SchedulerService } from './scheduler.service';
 
 @Global()
 @Module({
   imports: [
     VacanciesModule,
+    DocumentsModule,
     BullModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -21,7 +24,7 @@ import { SchedulerService } from './scheduler.service';
       { name: 'pdf-thumbnail' },
     ),
   ],
-  providers: [NotificationsProcessor, VacancyExpiryProcessor, SchedulerService],
+  providers: [NotificationsProcessor, VacancyExpiryProcessor, PdfThumbnailProcessor, SchedulerService],
   exports: [BullModule],
 })
 export class QueueModule {}
