@@ -109,21 +109,21 @@ minio_ensure_bucket() {
 
 # ---------- apps ----------
 api_start() {
-  if [[ ! -f "$ROOT_DIR/apps/api/dist/main.js" ]]; then
-    c_ylw "api not built yet (apps/api/dist/main.js missing) — run: pnpm --filter @zanweb/api build"
+  if [[ ! -f "$ROOT_DIR/apps/api/dist/apps/api/src/main.js" ]]; then
+    c_ylw "api not built yet (apps/api/dist/apps/api/src/main.js missing) — run: pnpm --filter @zanweb/api build\n"
     return 0
   fi
   start_bg api "$PID_DIR/api.pid" "$LOG_DIR/api.log" \
-    node "$ROOT_DIR/apps/api/dist/main.js"
+    node "$ROOT_DIR/apps/api/dist/apps/api/src/main.js"
 }
 api_stop()  { stop_bg api "$PID_DIR/api.pid"; }
 web_start() {
-  if [[ ! -f "$ROOT_DIR/apps/web/server.js" ]]; then
-    c_ylw "web not built yet (apps/web/server.js missing) — run: pnpm --filter @zanweb/web build"
+  if [[ ! -f "$ROOT_DIR/apps/web/.next/standalone/apps/web/server.js" ]]; then
+    c_ylw "web not built yet (apps/web/.next/standalone/apps/web/server.js missing) — run: pnpm --filter @zanweb/web build\n"
     return 0
   fi
   start_bg web "$PID_DIR/web.pid" "$LOG_DIR/web.log" \
-    node "$ROOT_DIR/apps/web/server.js"
+    node "$ROOT_DIR/apps/web/.next/standalone/apps/web/server.js"
 }
 web_stop()  { stop_bg web "$PID_DIR/web.pid"; }
 
