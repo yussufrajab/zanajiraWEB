@@ -28,5 +28,12 @@ module.exports = function resolveModule(modulePath, options) {
     const candidate = resolve(basedir, modulePath.replace(/\.js$/, '.ts'));
     if (existsSync(candidate)) return candidate;
   }
-  return require.resolve(modulePath, { paths: [basedir] });
+  // Delegate to Jest's default resolver instead of `require.resolve`. The
+  // latter treats the `paths` option as node_modules lookup roots and does
+  // NOT resolve relative specifiers against them, which breaks relative
+  // imports (e.g. `./auth.service`) — and the breakage is order-dependent,
+  // surfacing only when a worker that loads a complex dependency tree (the
+  // Prisma spec) shares the resolver with other suites. Jest's default
+  // resolver correctly resolves relative specifiers from `basedir`.
+  return options.defaultResolver(modulePath, options);
 };

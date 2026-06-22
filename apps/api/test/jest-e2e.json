@@ -5,5 +5,9 @@
   "transform": { "^.+\\.ts$": "ts-jest" },
   "testEnvironment": "node",
   "setupFiles": ["<rootDir>/test/setup-env.ts"],
-  "moduleNameMapper": { "^@zanweb/shared$": "<rootDir>/../../packages/shared/src" }
+  "moduleNameMapper": {
+    "^@zanweb/shared$": "<rootDir>/../../packages/shared/src",
+    "^@zanweb/prisma/client$": "<rootDir>/../../packages/prisma/src/client"
+  },
+  "resolver": "<rootDir>/test/shared-js-resolver.js"
 }
