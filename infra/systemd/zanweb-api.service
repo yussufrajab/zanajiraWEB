@@ -1,0 +1,15 @@
+[Unit]
+Description=CSC Zanzibar NestJS API
+After=network.target postgresql.service redis-server.service
+
+[Service]
+Type=simple
+User=zanweb
+WorkingDirectory=/opt/zanweb
+EnvironmentFile=/opt/zanweb/.env
+ExecStart=/usr/bin/node /opt/zanweb/apps/api/dist/main.js
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
