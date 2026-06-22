@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="48" height="48">
+  <circle cx="50" cy="50" r="48" fill="#c9a227" stroke="#003366" stroke-width="4"/>
+  <g fill="#003366">
+    <path d="M50 18 L54 38 L74 38 L58 50 L64 70 L50 58 L36 70 L42 50 L26 38 L46 38 Z"/>
+  </g>
+  <text x="50" y="88" text-anchor="middle" font-size="8" fill="#003366" font-weight="bold" font-family="sans-serif">CSC</text>
+</svg>

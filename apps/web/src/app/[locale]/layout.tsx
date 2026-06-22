@@ -36,14 +36,10 @@ export default async function LocaleLayout({
   if (!locales.includes(locale as never)) notFound();
   const messages = await getMessages();
   return (
-    <html lang={locale}>
-      <body>
-        <NextIntlClientProvider messages={messages}>
-          <Header locale={locale} />
-          <main>{children}</main>
-          <Footer />
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider messages={messages}>
+      <Header locale={locale} />
+      <main>{children}</main>
+      <Footer />
+    </NextIntlClientProvider>
   );
 }

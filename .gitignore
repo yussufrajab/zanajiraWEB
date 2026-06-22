@@ -39,4 +39,4 @@ test-results/
 .run/
 
 # Claude Code local session state
-.claude/
+.claude/.playwright-mcp
