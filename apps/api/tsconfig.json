@@ -7,7 +7,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "useDefineForClassFields": false,
-    "types": ["node", "jest"],
+    "types": ["node", "jest", "multer"],
     "paths": {
       "@zanweb/prisma/client": ["../../packages/prisma/src/client.ts"],
       "@zanweb/shared": ["../../packages/shared/src"]
