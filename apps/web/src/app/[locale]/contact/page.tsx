@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import DOMPurify from 'isomorphic-dompurify';
 import { api } from '../../../lib/api';
 import { localizedField } from '../../../lib/i18n-content';
@@ -6,7 +6,7 @@ import { localizedField } from '../../../lib/i18n-content';
 export const dynamic = 'force-dynamic';
 
 export default async function Contact({ params: { locale } }: { params: { locale: string } }) {
-  const t = useTranslations('Contact');
+  const t = await getTranslations({ locale, namespace: 'Contact' });
   const page = await api.pageBySlug('contact').catch(() => null);
   const body = page ? localizedField(page.bodySw, page.bodyEn, locale as 'sw' | 'en') : null;
   return (

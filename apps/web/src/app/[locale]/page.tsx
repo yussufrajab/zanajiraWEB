@@ -1,11 +1,11 @@
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import { api } from '../../lib/api';
 import { NoticeCard } from '../../components/NoticeCard';
 
 export const dynamic = 'force-dynamic';
 
 export default async function Home({ params: { locale } }: { params: { locale: string } }) {
-  const t = useTranslations('Home');
+  const t = await getTranslations({ locale, namespace: 'Home' });
   // SSR fetch of latest news + vacancies; degrade gracefully if the API is unreachable.
   const [news, vacancies] = await Promise.all([
     api.newsList({ page: 1 }).catch(() => ({ items: [] as Awaited<ReturnType<typeof api.newsList>>['items'], total: 0, page: 1, pageSize: 10 })),

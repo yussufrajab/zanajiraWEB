@@ -1,4 +1,4 @@
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { api } from '../../../lib/api';
 
@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic';
 type SearchParams = { q?: string };
 
 export default async function SearchPage({ params: { locale }, searchParams }: { params: { locale: string }; searchParams: SearchParams }) {
-  const t = useTranslations('Common');
+  const t = await getTranslations({ locale, namespace: 'Common' });
   let results: { id: string; type: string; slug: string; title: string }[] = [];
   if (searchParams.q) {
     results = await api.search(searchParams.q).catch(() => []);
@@ -18,7 +18,7 @@ export default async function SearchPage({ params: { locale }, searchParams }: {
     <>
       <h1>{t('searchResults')}</h1>
       <form method="get" aria-label={t('search')}>
-        <input name="q" defaultValue={searchParams.q ?? ''} placeholder={t('searchPlaceholder')} />
+        <input name="q" defaultValue={searchParams.q ?? ''} placeholder={t('searchPlaceholder')} aria-label={t('search')} />
         <button type="submit">{t('search')}</button>
       </form>
       {searchParams.q && results.length === 0 && <p>{t('noResults')}</p>}

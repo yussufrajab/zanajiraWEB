@@ -5,7 +5,10 @@ import type {
 const BASE = process.env.API_BASE_URL ?? 'http://localhost:4000/api';
 
 async function get<T>(path: string): Promise<T> {
-  const res = await fetch(`${BASE}${path}`, { next: { revalidate: 300 } });
+  // Pages are force-dynamic (SSR per request); fetch fresh data without the
+  // revalidate tag, which triggers a Next 14.2 "suspended thenable" bug in
+  // dynamic pages. The API caches listings in Redis already (Phase 5).
+  const res = await fetch(`${BASE}${path}`, { cache: 'no-store' });
   if (!res.ok) throw new Error(`API ${path} -> ${res.status}`);
   return res.json() as Promise<T>;
 }

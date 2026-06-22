@@ -8,10 +8,21 @@ import '../../styles/globals.css';
 
 export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
   const t = await getTranslations({ locale, namespace: 'Site' });
+  const name = t('name');
+  const url = process.env.WEB_BASE_URL ?? 'http://localhost:3000';
   return {
-    title: { default: t('name'), template: `%s | ${t('name')}` },
+    title: { default: name, template: `%s | ${name}` },
     description: 'Civil Service Commission – Zanzibar official website',
-    metadataBase: new URL(process.env.WEB_BASE_URL ?? 'http://localhost:3000'),
+    metadataBase: new URL(url),
+    alternates: { canonical: `/${locale}` },
+    openGraph: {
+      title: name,
+      description: 'Civil Service Commission – Zanzibar official website',
+      url: `${url}/${locale}`,
+      siteName: name,
+      locale: locale === 'sw' ? 'sw_TZ' : 'en_GB',
+      type: 'website',
+    },
   };
 }
 
