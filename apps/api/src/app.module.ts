@@ -9,6 +9,7 @@ import { UsersModule } from './users/users.module';
 import { DocumentsModule } from './documents/documents.module';
 import { CacheModule } from './cache/cache.module';
 import { ContentModule } from './content/content.module';
+import { NewsModule } from './news/news.module';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 
 @Module({
@@ -21,6 +22,7 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard';
     DocumentsModule,
     CacheModule,
     ContentModule,
+    NewsModule,
   ],
   controllers: [HealthController],
   providers: [{ provide: APP_GUARD, useClass: JwtAuthGuard }],
