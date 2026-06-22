@@ -14,6 +14,7 @@ import { VacanciesModule } from './vacancies/vacancies.module';
 import { InterviewsModule } from './interviews/interviews.module';
 import { SearchModule } from './search/search.module';
 import { PagesModule } from './pages/pages.module';
+import { DepartmentsModule } from './departments/departments.module';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 
 @Module({
@@ -31,6 +32,7 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard';
     InterviewsModule,
     SearchModule,
     PagesModule,
+    DepartmentsModule,
   ],
   controllers: [HealthController],
   providers: [{ provide: APP_GUARD, useClass: JwtAuthGuard }],
