@@ -1,0 +1,62 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - link "Civil Service Commission – Zanzibar" [ref=e3] [cursor=pointer]:
+      - /url: /en
+      - generic [ref=e4]: Civil Service Commission – Zanzibar
+    - navigation "Primary" [ref=e5]:
+      - list [ref=e6]:
+        - listitem [ref=e7]:
+          - link "News" [ref=e8] [cursor=pointer]:
+            - /url: /en/news
+        - listitem [ref=e9]:
+          - link "Vacancy Announcements" [ref=e10] [cursor=pointer]:
+            - /url: /en/vacancies
+        - listitem [ref=e11]:
+          - link "Call for Interviews" [ref=e12] [cursor=pointer]:
+            - /url: /en/interviews
+        - listitem [ref=e13]:
+          - link "About Us" [ref=e14] [cursor=pointer]:
+            - /url: /en/about
+        - listitem [ref=e15]:
+          - link "Organization Structure" [ref=e16] [cursor=pointer]:
+            - /url: /en/organization
+        - listitem [ref=e17]:
+          - link "Our Services" [ref=e18] [cursor=pointer]:
+            - /url: /en/services
+        - listitem [ref=e19]:
+          - link "Contact Us" [ref=e20] [cursor=pointer]:
+            - /url: /en/contact
+        - listitem [ref=e21]:
+          - link "External Links" [ref=e22] [cursor=pointer]:
+            - /url: /en/external-links
+    - button "Switch language" [ref=e23] [cursor=pointer]: Kiswahili
+  - main [ref=e24]:
+    - heading "Civil Service Commission – Zanzibar" [level=1] [ref=e25]
+    - paragraph [ref=e26]: Welcome to the official website of the Civil Service Commission of Zanzibar.
+    - region "Latest News" [ref=e27]:
+      - heading "Latest News" [level=2] [ref=e28]
+      - list
+    - region "Vacancy Announcements" [ref=e29]:
+      - heading "Vacancy Announcements" [level=2] [ref=e30]
+      - list
+  - contentinfo [ref=e31]:
+    - list [ref=e32]:
+      - listitem [ref=e33]:
+        - link "ZanAjira Application Portal" [ref=e34] [cursor=pointer]:
+          - /url: https://portal.zanajira.go.tz/home
+      - listitem [ref=e35]:
+        - link "National Ajira Portal" [ref=e36] [cursor=pointer]:
+          - /url: https://www.ajira.go.tz/
+      - listitem [ref=e37]:
+        - link "e-Office" [ref=e38] [cursor=pointer]:
+          - /url: https://eoffice.zanzibar.go.tz/
+      - listitem [ref=e39]:
+        - link "HRMS" [ref=e40] [cursor=pointer]:
+          - /url: https://hrms.zanzibar.go.tz/
+      - listitem [ref=e41]:
+        - link "Staff Email" [ref=e42] [cursor=pointer]:
+          - /url: https://mail.zanzibar.go.tz/
+      - listitem [ref=e43]:
+        - link "Salary Claim" [ref=e44] [cursor=pointer]:
+          - /url: https://salary.zanzibar.go.tz/
+  - alert [ref=e45]

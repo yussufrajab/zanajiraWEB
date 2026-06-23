@@ -7,7 +7,7 @@ Type=simple
 User=zanweb
 WorkingDirectory=/opt/zanweb
 EnvironmentFile=/opt/zanweb/.env
-ExecStart=/usr/bin/node /opt/zanweb/apps/api/dist/main.js
+ExecStart=/usr/bin/node /opt/zanweb/apps/api/dist/apps/api/src/main.js
 Restart=on-failure
 RestartSec=5
 

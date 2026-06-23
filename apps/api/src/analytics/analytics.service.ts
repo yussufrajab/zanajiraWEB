@@ -14,7 +14,7 @@ export class AnalyticsService {
   }
 
   async dashboard() {
-    const [byMonth, byMda, topDocs] = await Promise.all([
+    const [byMonth, byMdaRaw, topDocs] = await Promise.all([
       this.prisma.$queryRaw`
         SELECT to_char(date_trunc('month', "publishDate"), 'YYYY-MM') AS month,
                COUNT(*) AS count
@@ -28,13 +28,15 @@ export class AnalyticsService {
         _count: true,
         orderBy: { _count: { mda: 'desc' } },
         take: 10,
-      }) as unknown as { mda: string; _count: number }[],
+      }) as unknown as { mda: string; _count: { mda: number } }[],
       this.prisma.document.findMany({
         orderBy: { downloadCount: 'desc' },
         take: 10,
         select: { id: true, filename: true, downloadCount: true },
       }),
     ]);
+
+    const byMda = byMdaRaw.map((row) => ({ mda: row.mda, _count: row._count.mda }));
 
     return { byMonth, byMda, topDocs };
   }

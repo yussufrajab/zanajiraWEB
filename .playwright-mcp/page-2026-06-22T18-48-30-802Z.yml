@@ -1,0 +1,117 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Civil Service Commission – Zanzibar" [ref=e4] [cursor=pointer]:
+        - /url: /en
+        - generic [ref=e5]: Civil Service Commission – Zanzibar
+      - navigation "Primary" [ref=e6]:
+        - list [ref=e7]:
+          - listitem [ref=e8]:
+            - link "News" [ref=e9] [cursor=pointer]:
+              - /url: /en/news
+          - listitem [ref=e10]:
+            - link "Vacancy Announcements" [ref=e11] [cursor=pointer]:
+              - /url: /en/vacancies
+          - listitem [ref=e12]:
+            - link "Call for Interviews" [ref=e13] [cursor=pointer]:
+              - /url: /en/interviews
+          - listitem [ref=e14]:
+            - link "About Us" [ref=e15] [cursor=pointer]:
+              - /url: /en/about
+          - listitem [ref=e16]:
+            - link "Organization Structure" [ref=e17] [cursor=pointer]:
+              - /url: /en/organization
+          - listitem [ref=e18]:
+            - link "Our Services" [ref=e19] [cursor=pointer]:
+              - /url: /en/services
+          - listitem [ref=e20]:
+            - link "Contact Us" [ref=e21] [cursor=pointer]:
+              - /url: /en/contact
+          - listitem [ref=e22]:
+            - link "External Links" [ref=e23] [cursor=pointer]:
+              - /url: /en/external-links
+      - button "Switch language" [ref=e25] [cursor=pointer]: Kiswahili
+  - main [ref=e28]:
+    - article [ref=e31]:
+      - heading "Address" [level=1] [ref=e32]
+      - generic [ref=e35]:
+        - generic [ref=e36]:
+          - term [ref=e37]:
+            - img [ref=e38]
+            - text: Phone
+          - definition [ref=e40]: +255 24 223 0000
+        - generic [ref=e41]:
+          - term [ref=e42]:
+            - img [ref=e43]
+            - text: Email
+          - definition [ref=e46]:
+            - link "info@zanajira.go.tz" [ref=e47] [cursor=pointer]:
+              - /url: mailto:info@zanajira.go.tz
+      - iframe [ref=e48]:
+        - generic [ref=f1e2]:
+          - img
+          - region "Map" [ref=f1e3]
+          - generic:
+            - generic [ref=f1e4]:
+              - button "Zoom In" [ref=f1e5] [cursor=pointer]
+              - button "Zoom Out" [ref=f1e7] [cursor=pointer]
+            - group [ref=f1e9]:
+              - generic [ref=f1e10]:
+                - text: ©
+                - link "OpenStreetMap contributors" [ref=f1e11] [cursor=pointer]:
+                  - /url: /copyright
+                - text: ♥️
+                - link "Make a Donation" [ref=f1e12] [cursor=pointer]:
+                  - /url: https://supporting.openstreetmap.org
+                - text: .
+                - link "Website and API terms" [ref=f1e13] [cursor=pointer]:
+                  - /url: https://wiki.osmfoundation.org/wiki/Terms_of_Use
+  - contentinfo [ref=e49]:
+    - generic [ref=e50]:
+      - generic [ref=e51]:
+        - generic [ref=e52]:
+          - strong [ref=e54]: Civil Service Commission – Zanzibar
+          - paragraph [ref=e55]: "Address: P.O. Box 251, Zanzibar"
+          - paragraph [ref=e56]: "Phone: +255 24 223 2058"
+          - paragraph [ref=e57]: "Email: info@zanajira.go.tz"
+        - generic [ref=e58]:
+          - heading "Quick Links" [level=4] [ref=e59]
+          - list [ref=e60]:
+            - listitem [ref=e61]:
+              - link "› ZanAjira Application Portal" [ref=e62] [cursor=pointer]:
+                - /url: https://portal.zanajira.go.tz/home
+            - listitem [ref=e63]:
+              - link "› National Ajira Portal" [ref=e64] [cursor=pointer]:
+                - /url: https://www.ajira.go.tz/
+            - listitem [ref=e65]:
+              - link "› e-Office" [ref=e66] [cursor=pointer]:
+                - /url: https://eoffice.zanzibar.go.tz/
+            - listitem [ref=e67]:
+              - link "› HRMS" [ref=e68] [cursor=pointer]:
+                - /url: https://hrms.zanzibar.go.tz/
+            - listitem [ref=e69]:
+              - link "› Staff Email" [ref=e70] [cursor=pointer]:
+                - /url: https://mail.zanzibar.go.tz/
+            - listitem [ref=e71]:
+              - link "› Salary Claim" [ref=e72] [cursor=pointer]:
+                - /url: https://salary.zanzibar.go.tz/
+        - generic [ref=e73]:
+          - heading "Government Links" [level=4] [ref=e74]
+          - list [ref=e75]:
+            - listitem [ref=e76]:
+              - link "› State House Zanzibar" [ref=e77] [cursor=pointer]:
+                - /url: https://ikulu.go.tz/
+            - listitem [ref=e78]:
+              - link "› eGAZ" [ref=e79] [cursor=pointer]:
+                - /url: https://egaz.go.tz/
+            - listitem [ref=e80]:
+              - link "› ZAECA" [ref=e81] [cursor=pointer]:
+                - /url: https://zaeca.go.tz/
+            - listitem [ref=e82]:
+              - link "› ZPSC" [ref=e83] [cursor=pointer]:
+                - /url: https://zpsc.go.tz/
+            - listitem [ref=e84]:
+              - link "› IPA" [ref=e85] [cursor=pointer]:
+                - /url: https://ipa.go.tz/
+      - generic [ref=e86]: © 2026 Civil Service Commission – Zanzibar. All rights reserved.
+  - alert [ref=e87]

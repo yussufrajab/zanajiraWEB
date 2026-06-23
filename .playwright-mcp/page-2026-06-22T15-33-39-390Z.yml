@@ -1,0 +1,12 @@
+- generic [ref=e1]:
+  - alert [ref=e2]
+  - generic [ref=e3]:
+    - heading "Admin Login" [level=1] [ref=e4]
+    - alert [ref=e10]: Invalid credentials
+    - generic [ref=e5]:
+      - text: Email
+      - textbox "Email" [ref=e6]: admin@zanajira.go.tz
+    - generic [ref=e7]:
+      - text: Password
+      - textbox "Password" [ref=e8]: ChangeMe!123
+    - button "Sign in" [active] [ref=e9] [cursor=pointer]

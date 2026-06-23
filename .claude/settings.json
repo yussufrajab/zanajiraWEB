@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm -r typecheck)",
+      "Bash(pnpm -r test)",
+      "Bash(pnpm -r lint)",
+      "Bash(pnpm typecheck)",
+      "Bash(pnpm test)",
+      "Bash(pnpm lint)",
+      "Bash(pnpm --filter @zanweb/shared typecheck)",
+      "Bash(pnpm --filter @zanweb/prisma typecheck)",
+      "Bash(pnpm --filter @zanweb/prisma test)",
+      "Bash(pnpm --filter @zanweb/web test:e2e)",
+      "Bash(./manage.sh status)"
+    ]
+  }
+}

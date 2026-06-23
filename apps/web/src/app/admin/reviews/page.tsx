@@ -3,6 +3,9 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { adminApi } from '@/lib/admin-api';
+import { StatusBadge } from '@/components/admin/StatusBadge';
+import { Loading } from '@/components/Loading';
+import { EmptyState } from '@/components/EmptyState';
 
 interface ReviewItem {
   id: string;
@@ -29,19 +32,44 @@ export default function ReviewsAdmin() {
   }, []);
 
   return (
-    <div>
-      <h1>Pending review</h1>
-      {loading && <p>Loading…</p>}
-      {error && <p role="alert">{error}</p>}
-      {items.length === 0 && !loading && <p>Nothing waiting for review.</p>}
-      <ul className="admin-list">
-        {items.map((item) => (
-          <li key={`${item.type}-${item.id}`}>
-            <strong>{item.type}:</strong>{' '}
-            <Link href={item.href}>{item.title}</Link> — {item.status}
-          </li>
-        ))}
-      </ul>
+    <div className="fade-in">
+      <div className="admin-page-header">
+        <h1>Pending review</h1>
+      </div>
+
+      {loading && <Loading />}
+      {error && <div className="admin-alert admin-alert-error">{error}</div>}
+
+      {!loading && !error && items.length === 0 && (
+        <EmptyState title="Nothing waiting for review" message="All submitted content has been reviewed." />
+      )}
+
+      {!loading && !error && items.length > 0 && (
+        <div className="admin-table-wrap">
+          <table className="admin-table">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Title</th>
+                <th>Status</th>
+                <th style={{ textAlign: 'right' }}>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {items.map((item) => (
+                <tr key={`${item.type}-${item.id}`}>
+                  <td>{item.type}</td>
+                  <td>{item.title}</td>
+                  <td><StatusBadge status={item.status} /></td>
+                  <td style={{ textAlign: 'right' }}>
+                    <Link href={item.href} className="admin-btn admin-btn-outline admin-btn-sm">Review</Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }

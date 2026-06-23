@@ -57,35 +57,71 @@ export function VacancyForm({ initial }: { initial?: any }) {
   }
 
   return (
-    <form onSubmit={save} className="admin-form">
-      <h1>{initial?.id ? 'Edit vacancy' : 'New vacancy'}</h1>
-      {error && <p role="alert">{error}</p>}
-      <label>Title <input value={form.title} onChange={set('title')} required /></label>
-      <label>MDA <input value={form.mda} onChange={set('mda')} required /></label>
-      <label>Department
-        <select value={form.departmentId} onChange={set('departmentId')}>
-          <option value="">— Select department —</option>
-          {departments.map((d) => <option key={d.id} value={d.id}>{d.nameSw}{d.nameEn ? ` / ${d.nameEn}` : ''}</option>)}
-        </select>
-      </label>
-      <label>Closing date <input type="date" value={form.closingDate} onChange={set('closingDate')} required /></label>
-      <label>Apply URL <input type="url" value={form.applyUrl} onChange={set('applyUrl')} /></label>
-      {initial?.id && <DocumentUploader ownerType="Vacancy" ownerId={initial.id} />}
-      <div className="form-actions">
-        <button type="submit" disabled={saving}>Save draft</button>
+    <form onSubmit={save} className="admin-form fade-in">
+      <div className="admin-page-header">
+        <h1>{initial?.id ? 'Edit vacancy' : 'New vacancy'}</h1>
+      </div>
+
+      {error && <div className="admin-alert admin-alert-error">{error}</div>}
+
+      <div className="admin-form-section">
+        <h2>Basic details</h2>
+        <div className="admin-form-grid">
+          <label>
+            Title *
+            <input value={form.title} onChange={set('title')} required />
+          </label>
+          <label>
+            MDA *
+            <input value={form.mda} onChange={set('mda')} required />
+          </label>
+          <label>
+            Department
+            <select value={form.departmentId} onChange={set('departmentId')}>
+              <option value="">— Select department —</option>
+              {departments.map((d) => <option key={d.id} value={d.id}>{d.nameSw}{d.nameEn ? ` / ${d.nameEn}` : ''}</option>)}
+            </select>
+          </label>
+          <label>
+            Closing date *
+            <input type="date" value={form.closingDate} onChange={set('closingDate')} required />
+          </label>
+          <label className="full-width">
+            Apply URL
+            <input type="url" value={form.applyUrl} onChange={set('applyUrl')} />
+          </label>
+        </div>
+      </div>
+
+      {initial?.id && (
+        <div className="admin-form-section">
+          <h2>Documents</h2>
+          <DocumentUploader ownerType="Vacancy" ownerId={initial.id} />
+        </div>
+      )}
+
+      <div className="admin-form-section">
+        <div className="admin-form-actions">
+          <button type="submit" className="admin-btn admin-btn-primary" disabled={saving}>
+            {saving && <span className="spinner" aria-hidden="true" />}
+            Save draft
+          </button>
+          {initial?.id && (
+            <>
+              <button type="button" className="admin-btn admin-btn-outline" onClick={() => transition('InReview')}>Submit for review</button>
+              <button type="button" className="admin-btn admin-btn-success" onClick={() => transition('Published')}>Publish</button>
+              <button type="button" className="admin-btn admin-btn-danger" onClick={() => transition('Rejected')}>Reject</button>
+            </>
+          )}
+        </div>
+
         {initial?.id && (
-          <>
-            <button type="button" onClick={() => transition('InReview')}>Submit for review</button>
-            <button type="button" className="success" onClick={() => transition('Published')}>Publish</button>
-            <button type="button" className="danger" onClick={() => transition('Rejected')}>Reject</button>
-          </>
+          <label className="full-width" style={{ marginTop: '1rem' }}>
+            Reviewer comment (for reject / request changes)
+            <textarea value={comment} onChange={(e) => setComment(e.target.value)} rows={3} />
+          </label>
         )}
       </div>
-      {initial?.id && (
-        <label>Reviewer comment
-          <textarea value={comment} onChange={(e) => setComment(e.target.value)} rows={3} />
-        </label>
-      )}
     </form>
   );
 }

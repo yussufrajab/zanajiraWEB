@@ -15,7 +15,7 @@ pnpm --filter @zanweb/api build
 pnpm --filter @zanweb/web build
 
 echo ">> linking standalone web server entrypoint"
-ln -sf "$ROOT_DIR/apps/web/.next/standalone/server.js" "$ROOT_DIR/apps/web/server.js"
+ln -sf "$ROOT_DIR/apps/web/.next/standalone/apps/web/server.js" "$ROOT_DIR/apps/web/server.js"
 
 echo ">> applying migrations"
 pnpm --filter @zanweb/prisma prisma migrate deploy

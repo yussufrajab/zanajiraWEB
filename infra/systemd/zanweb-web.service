@@ -7,7 +7,7 @@ Type=simple
 User=zanweb
 WorkingDirectory=/opt/zanweb
 EnvironmentFile=/opt/zanweb/.env
-ExecStart=/usr/bin/node /opt/zanweb/apps/web/.next/standalone/server.js
+ExecStart=/usr/bin/node /opt/zanweb/apps/web/server.js
 Restart=on-failure
 RestartSec=5
 

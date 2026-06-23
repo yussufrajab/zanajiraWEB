@@ -52,30 +52,80 @@ export function NewsForm({ initial }: { initial?: any }) {
   }
 
   return (
-    <form onSubmit={save} className="admin-form">
-      <h1>{initial?.id ? 'Edit news' : 'New news'}</h1>
-      {error && <p role="alert">{error}</p>}
-      <label>Title (Swahili) <input value={form.titleSw} onChange={set('titleSw')} required /></label>
-      <label>Title (English) <input value={form.titleEn} onChange={set('titleEn')} /></label>
-      <label>Body (Swahili) <textarea value={form.bodySw} onChange={set('bodySw')} rows={8} required /></label>
-      <label>Body (English) <textarea value={form.bodyEn} onChange={set('bodyEn')} rows={8} /></label>
-      <label>Publish date <input type="date" value={form.publishDate} onChange={set('publishDate')} /></label>
-      {initial?.id && <DocumentUploader ownerType="NewsPost" ownerId={initial.id} />}
-      <div className="form-actions">
-        <button type="submit" disabled={saving}>Save draft</button>
+    <form onSubmit={save} className="admin-form fade-in">
+      <div className="admin-page-header">
+        <h1>{initial?.id ? 'Edit news' : 'New news'}</h1>
+      </div>
+
+      {error && <div className="admin-alert admin-alert-error">{error}</div>}
+
+      <div className="admin-form-section">
+        <h2>Titles</h2>
+        <div className="admin-form-grid">
+          <label>
+            Title (Swahili) *
+            <input value={form.titleSw} onChange={set('titleSw')} required />
+          </label>
+          <label>
+            Title (English)
+            <input value={form.titleEn} onChange={set('titleEn')} />
+          </label>
+        </div>
+      </div>
+
+      <div className="admin-form-section">
+        <h2>Content</h2>
+        <div className="admin-form-grid">
+          <label className="full-width">
+            Body (Swahili) *
+            <textarea value={form.bodySw} onChange={set('bodySw')} rows={10} required />
+          </label>
+          <label className="full-width">
+            Body (English)
+            <textarea value={form.bodyEn} onChange={set('bodyEn')} rows={10} />
+          </label>
+        </div>
+      </div>
+
+      <div className="admin-form-section">
+        <h2>Publishing</h2>
+        <div className="admin-form-grid">
+          <label>
+            Publish date
+            <input type="date" value={form.publishDate} onChange={set('publishDate')} />
+          </label>
+        </div>
+      </div>
+
+      {initial?.id && (
+        <div className="admin-form-section">
+          <h2>Documents</h2>
+          <DocumentUploader ownerType="NewsPost" ownerId={initial.id} />
+        </div>
+      )}
+
+      <div className="admin-form-section">
+        <div className="admin-form-actions">
+          <button type="submit" className="admin-btn admin-btn-primary" disabled={saving}>
+            {saving && <span className="spinner" aria-hidden="true" />}
+            Save draft
+          </button>
+          {initial?.id && (
+            <>
+              <button type="button" className="admin-btn admin-btn-outline" onClick={() => transition('InReview')}>Submit for review</button>
+              <button type="button" className="admin-btn admin-btn-success" onClick={() => transition('Published')}>Publish</button>
+              <button type="button" className="admin-btn admin-btn-danger" onClick={() => transition('Rejected')}>Reject</button>
+            </>
+          )}
+        </div>
+
         {initial?.id && (
-          <>
-            <button type="button" onClick={() => transition('InReview')}>Submit for review</button>
-            <button type="button" className="success" onClick={() => transition('Published')}>Publish</button>
-            <button type="button" className="danger" onClick={() => transition('Rejected')}>Reject</button>
-          </>
+          <label className="full-width" style={{ marginTop: '1rem' }}>
+            Reviewer comment (for reject / request changes)
+            <textarea value={comment} onChange={(e) => setComment(e.target.value)} rows={3} />
+          </label>
         )}
       </div>
-      {initial?.id && (
-        <label>Reviewer comment (for reject / request changes)
-          <textarea value={comment} onChange={(e) => setComment(e.target.value)} rows={3} />
-        </label>
-      )}
     </form>
   );
 }

@@ -1,0 +1,103 @@
+- generic [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Civil Service Commission – Zanzibar" [active] [ref=e4] [cursor=pointer]:
+        - /url: /en
+        - generic [ref=e5]: Civil Service Commission – Zanzibar
+      - generic [ref=e6]:
+        - button "Switch language" [ref=e7] [cursor=pointer]:
+          - img [ref=e8]
+          - text: Kiswahili
+        - button "Open menu" [ref=e11] [cursor=pointer]:
+          - img [ref=e12]
+    - navigation "Mobile primary":
+      - list:
+        - listitem:
+          - link "News":
+            - /url: /en/news
+        - listitem:
+          - link "Vacancy Announcements":
+            - /url: /en/vacancies
+        - listitem:
+          - link "Call for Interviews":
+            - /url: /en/interviews
+        - listitem:
+          - link "About Us":
+            - /url: /en/about
+        - listitem:
+          - link "Organization Structure":
+            - /url: /en/organization
+        - listitem:
+          - link "Our Services":
+            - /url: /en/services
+        - listitem:
+          - link "Contact Us":
+            - /url: /en/contact
+        - listitem:
+          - link "External Links":
+            - /url: /en/external-links
+  - main [ref=e13]:
+    - generic [ref=e15]:
+      - generic [ref=e17]:
+        - heading "Civil Service Commission – Zanzibar" [level=1] [ref=e18]
+        - paragraph [ref=e19]: Welcome to the official website of the Civil Service Commission of Zanzibar.
+      - generic [ref=e21]:
+        - region "Latest News" [ref=e22]:
+          - heading "Latest News" [level=2] [ref=e23]
+          - generic [ref=e24]:
+            - img [ref=e25]
+            - heading "No news yet" [level=3] [ref=e30]
+        - region "Vacancy Announcements" [ref=e31]:
+          - heading "Vacancy Announcements" [level=2] [ref=e32]
+          - generic [ref=e33]:
+            - img [ref=e34]
+            - heading "No vacancies yet" [level=3] [ref=e39]
+  - contentinfo [ref=e40]:
+    - generic [ref=e41]:
+      - generic [ref=e42]:
+        - generic [ref=e43]:
+          - strong [ref=e45]: Civil Service Commission – Zanzibar
+          - paragraph [ref=e46]: "Address: P.O. Box 251, Zanzibar"
+          - paragraph [ref=e47]: "Phone: +255 24 223 2058"
+          - paragraph [ref=e48]: "Email: info@zanajira.go.tz"
+        - generic [ref=e49]:
+          - heading "Quick Links" [level=4] [ref=e50]
+          - list [ref=e51]:
+            - listitem [ref=e52]:
+              - link "ZanAjira Application Portal" [ref=e53] [cursor=pointer]:
+                - /url: https://portal.zanajira.go.tz/home
+            - listitem [ref=e54]:
+              - link "National Ajira Portal" [ref=e55] [cursor=pointer]:
+                - /url: https://www.ajira.go.tz/
+            - listitem [ref=e56]:
+              - link "e-Office" [ref=e57] [cursor=pointer]:
+                - /url: https://eoffice.zanzibar.go.tz/
+            - listitem [ref=e58]:
+              - link "HRMS" [ref=e59] [cursor=pointer]:
+                - /url: https://hrms.zanzibar.go.tz/
+            - listitem [ref=e60]:
+              - link "Staff Email" [ref=e61] [cursor=pointer]:
+                - /url: https://mail.zanzibar.go.tz/
+            - listitem [ref=e62]:
+              - link "Salary Claim" [ref=e63] [cursor=pointer]:
+                - /url: https://salary.zanzibar.go.tz/
+        - generic [ref=e64]:
+          - heading "Government Links" [level=4] [ref=e65]
+          - list [ref=e66]:
+            - listitem [ref=e67]:
+              - link "State House Zanzibar" [ref=e68] [cursor=pointer]:
+                - /url: https://ikulu.go.tz/
+            - listitem [ref=e69]:
+              - link "eGAZ" [ref=e70] [cursor=pointer]:
+                - /url: https://egaz.go.tz/
+            - listitem [ref=e71]:
+              - link "ZAECA" [ref=e72] [cursor=pointer]:
+                - /url: https://zaeca.go.tz/
+            - listitem [ref=e73]:
+              - link "ZPSC" [ref=e74] [cursor=pointer]:
+                - /url: https://zpsc.go.tz/
+            - listitem [ref=e75]:
+              - link "IPA" [ref=e76] [cursor=pointer]:
+                - /url: https://ipa.go.tz/
+      - generic [ref=e77]: © 2026 Civil Service Commission – Zanzibar. All rights reserved.
+  - alert [ref=e78]

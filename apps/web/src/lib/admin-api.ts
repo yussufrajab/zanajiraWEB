@@ -69,4 +69,6 @@ export const adminApi = {
   pageUpsert: (dto: any) => authed('/pages', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(dto) }),
   pageTree: () => authed('/pages/tree'),
   pageBySlug: (slug: string) => authed(`/pages/by-slug/${slug}`),
+
+  dashboard: () => authed('/analytics/dashboard'),
 };

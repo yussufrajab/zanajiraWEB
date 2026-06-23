@@ -1,0 +1,1 @@
+/home/yusuf/zanWEB/apps/web/.next/standalone/apps/web/server.js

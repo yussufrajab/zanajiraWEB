@@ -1,0 +1,247 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Civil Service Commission – Zanzibar" [ref=e4] [cursor=pointer]:
+        - /url: /en
+        - generic [ref=e5]: Civil Service Commission – Zanzibar
+      - navigation "Primary" [ref=e6]:
+        - list [ref=e7]:
+          - listitem [ref=e8]:
+            - link "News" [ref=e9] [cursor=pointer]:
+              - /url: /en/news
+          - listitem [ref=e10]:
+            - link "Vacancy Announcements" [ref=e11] [cursor=pointer]:
+              - /url: /en/vacancies
+          - listitem [ref=e12]:
+            - link "Call for Interviews" [ref=e13] [cursor=pointer]:
+              - /url: /en/interviews
+          - listitem [ref=e14]:
+            - link "About Us" [ref=e15] [cursor=pointer]:
+              - /url: /en/about
+          - listitem [ref=e16]:
+            - link "Organization Structure" [ref=e17] [cursor=pointer]:
+              - /url: /en/organization
+          - listitem [ref=e18]:
+            - link "Our Services" [ref=e19] [cursor=pointer]:
+              - /url: /en/services
+          - listitem [ref=e20]:
+            - link "Contact Us" [ref=e21] [cursor=pointer]:
+              - /url: /en/contact
+          - listitem [ref=e22]:
+            - link "External Links" [ref=e23] [cursor=pointer]:
+              - /url: /en/external-links
+      - button "Switch language" [ref=e25] [cursor=pointer]: Kiswahili
+  - main [ref=e28]:
+    - generic [ref=e30]:
+      - generic [ref=e32]:
+        - heading "Civil Service Commission – Zanzibar" [level=1] [ref=e33]
+        - paragraph [ref=e34]: Welcome to the official website of the Civil Service Commission of Zanzibar.
+      - generic [ref=e36]:
+        - region "Latest News" [ref=e37]:
+          - heading "Latest News" [level=2] [ref=e38]
+          - list [ref=e39]:
+            - listitem [ref=e40]:
+              - article [ref=e41]:
+                - heading "Civil Service Commission Holds Stakeholder Engagement Forum" [level=3] [ref=e42]:
+                  - link "Civil Service Commission Holds Stakeholder Engagement Forum" [ref=e43] [cursor=pointer]:
+                    - /url: /en/news/civil-service-commission-holds-stakeholder-engagement-forum-aeo8
+                - generic [ref=e44]:
+                  - time [ref=e45]:
+                    - img [ref=e46]
+                    - text: 22/06/2026
+                  - generic [ref=e48]: Published
+            - listitem [ref=e49]:
+              - article [ref=e50]:
+                - heading "Public Service Staff Training Calendar for 2026 Released" [level=3] [ref=e51]:
+                  - link "Public Service Staff Training Calendar for 2026 Released" [ref=e52] [cursor=pointer]:
+                    - /url: /en/news/public-service-staff-training-calendar-for-2026-released-qlwg
+                - generic [ref=e53]:
+                  - time [ref=e54]:
+                    - img [ref=e55]
+                    - text: 22/06/2026
+                  - generic [ref=e57]: Published
+            - listitem [ref=e58]:
+              - article [ref=e59]:
+                - heading "Civil Service Commission Launches New Online Job Application System" [level=3] [ref=e60]:
+                  - link "Civil Service Commission Launches New Online Job Application System" [ref=e61] [cursor=pointer]:
+                    - /url: /en/news/civil-service-commission-launches-new-online-job-application-77nx
+                - generic [ref=e62]:
+                  - time [ref=e63]:
+                    - img [ref=e64]
+                    - text: 22/06/2026
+                  - generic [ref=e66]: Published
+            - listitem [ref=e67]:
+              - article [ref=e68]:
+                - heading "Civil Service Commission Holds Stakeholder Engagement Forum" [level=3] [ref=e69]:
+                  - link "Civil Service Commission Holds Stakeholder Engagement Forum" [ref=e70] [cursor=pointer]:
+                    - /url: /en/news/civil-service-commission-holds-stakeholder-engagement-forum-3jv2
+                - generic [ref=e71]:
+                  - time [ref=e72]:
+                    - img [ref=e73]
+                    - text: 22/06/2026
+                  - generic [ref=e75]: Published
+            - listitem [ref=e76]:
+              - article [ref=e77]:
+                - heading "Public Service Staff Training Calendar for 2026 Released" [level=3] [ref=e78]:
+                  - link "Public Service Staff Training Calendar for 2026 Released" [ref=e79] [cursor=pointer]:
+                    - /url: /en/news/public-service-staff-training-calendar-for-2026-released-qae9
+                - generic [ref=e80]:
+                  - time [ref=e81]:
+                    - img [ref=e82]
+                    - text: 22/06/2026
+                  - generic [ref=e84]: Published
+        - region "Vacancy Announcements" [ref=e85]:
+          - heading "Vacancy Announcements" [level=2] [ref=e86]
+          - list [ref=e87]:
+            - listitem [ref=e88]:
+              - article [ref=e89]:
+                - heading "Public Service Officer – Human Resource Management" [level=3] [ref=e90]:
+                  - link "Public Service Officer – Human Resource Management" [ref=e91] [cursor=pointer]:
+                    - /url: /en/vacancies/public-service-officer-human-resource-management-uajq
+                - generic [ref=e92]:
+                  - time [ref=e93]:
+                    - img [ref=e94]
+                    - text: 22/06/2026
+                  - generic [ref=e96]: Open
+            - listitem [ref=e97]:
+              - article [ref=e98]:
+                - heading "ICT Support Specialist" [level=3] [ref=e99]:
+                  - link "ICT Support Specialist" [ref=e100] [cursor=pointer]:
+                    - /url: /en/vacancies/ict-support-specialist-z4yr
+                - generic [ref=e101]:
+                  - time [ref=e102]:
+                    - img [ref=e103]
+                    - text: 22/06/2026
+                  - generic [ref=e105]: Open
+            - listitem [ref=e106]:
+              - article [ref=e107]:
+                - heading "Senior Accountant" [level=3] [ref=e108]:
+                  - link "Senior Accountant" [ref=e109] [cursor=pointer]:
+                    - /url: /en/vacancies/senior-accountant-35y5
+                - generic [ref=e110]:
+                  - time [ref=e111]:
+                    - img [ref=e112]
+                    - text: 22/06/2026
+                  - generic [ref=e114]: Open
+            - listitem [ref=e115]:
+              - article [ref=e116]:
+                - heading "ICT Support Specialist" [level=3] [ref=e117]:
+                  - link "ICT Support Specialist" [ref=e118] [cursor=pointer]:
+                    - /url: /en/vacancies/ict-support-specialist-l2we
+                - generic [ref=e119]:
+                  - time [ref=e120]:
+                    - img [ref=e121]
+                    - text: 22/06/2026
+                  - generic [ref=e123]: Open
+            - listitem [ref=e124]:
+              - article [ref=e125]:
+                - heading "Public Service Officer – Human Resource Management" [level=3] [ref=e126]:
+                  - link "Public Service Officer – Human Resource Management" [ref=e127] [cursor=pointer]:
+                    - /url: /en/vacancies/public-service-officer-human-resource-management-q5sc
+                - generic [ref=e128]:
+                  - time [ref=e129]:
+                    - img [ref=e130]
+                    - text: 22/06/2026
+                  - generic [ref=e132]: Open
+        - region "Call for Interviews" [ref=e133]:
+          - heading "Call for Interviews" [level=2] [ref=e134]
+          - list [ref=e135]:
+            - listitem [ref=e136]:
+              - article [ref=e137]:
+                - heading "Call for Interview – Public Service Officers Batch 1" [level=3] [ref=e138]:
+                  - link "Call for Interview – Public Service Officers Batch 1" [ref=e139] [cursor=pointer]:
+                    - /url: /en/interviews/call-for-interview-public-service-officers-batch-1-dr56
+                - generic [ref=e140]:
+                  - time [ref=e141]:
+                    - img [ref=e142]
+                    - text: 22/06/2026
+                  - generic [ref=e144]: Published
+            - listitem [ref=e145]:
+              - article [ref=e146]:
+                - heading "Call for Interview – ICT Support Specialists" [level=3] [ref=e147]:
+                  - link "Call for Interview – ICT Support Specialists" [ref=e148] [cursor=pointer]:
+                    - /url: /en/interviews/call-for-interview-ict-support-specialists-z4ba
+                - generic [ref=e149]:
+                  - time [ref=e150]:
+                    - img [ref=e151]
+                    - text: 22/06/2026
+                  - generic [ref=e153]: Published
+            - listitem [ref=e154]:
+              - article [ref=e155]:
+                - heading "Interview Results – Senior Accountants June 2026" [level=3] [ref=e156]:
+                  - link "Interview Results – Senior Accountants June 2026" [ref=e157] [cursor=pointer]:
+                    - /url: /en/interviews/interview-results-senior-accountants-june-2026-wek9
+                - generic [ref=e158]:
+                  - time [ref=e159]:
+                    - img [ref=e160]
+                    - text: 22/06/2026
+                  - generic [ref=e162]: Published
+            - listitem [ref=e163]:
+              - article [ref=e164]:
+                - heading "Call for Interview – Public Service Officers Batch 1" [level=3] [ref=e165]:
+                  - link "Call for Interview – Public Service Officers Batch 1" [ref=e166] [cursor=pointer]:
+                    - /url: /en/interviews/call-for-interview-public-service-officers-batch-1-ciyx
+                - generic [ref=e167]:
+                  - time [ref=e168]:
+                    - img [ref=e169]
+                    - text: 22/06/2026
+                  - generic [ref=e171]: Published
+            - listitem [ref=e172]:
+              - article [ref=e173]:
+                - heading "Interview Results – Senior Accountants June 2026" [level=3] [ref=e174]:
+                  - link "Interview Results – Senior Accountants June 2026" [ref=e175] [cursor=pointer]:
+                    - /url: /en/interviews/interview-results-senior-accountants-june-2026-5y2u
+                - generic [ref=e176]:
+                  - time [ref=e177]:
+                    - img [ref=e178]
+                    - text: 22/06/2026
+                  - generic [ref=e180]: Published
+  - contentinfo [ref=e181]:
+    - generic [ref=e182]:
+      - generic [ref=e183]:
+        - generic [ref=e184]:
+          - strong [ref=e186]: Civil Service Commission – Zanzibar
+          - paragraph [ref=e187]: "Address: P.O. Box 251, Zanzibar"
+          - paragraph [ref=e188]: "Phone: +255 24 223 2058"
+          - paragraph [ref=e189]: "Email: info@zanajira.go.tz"
+        - generic [ref=e190]:
+          - heading "Quick Links" [level=4] [ref=e191]
+          - list [ref=e192]:
+            - listitem [ref=e193]:
+              - link "ZanAjira Application Portal" [ref=e194] [cursor=pointer]:
+                - /url: https://portal.zanajira.go.tz/home
+            - listitem [ref=e195]:
+              - link "National Ajira Portal" [ref=e196] [cursor=pointer]:
+                - /url: https://www.ajira.go.tz/
+            - listitem [ref=e197]:
+              - link "e-Office" [ref=e198] [cursor=pointer]:
+                - /url: https://eoffice.zanzibar.go.tz/
+            - listitem [ref=e199]:
+              - link "HRMS" [ref=e200] [cursor=pointer]:
+                - /url: https://hrms.zanzibar.go.tz/
+            - listitem [ref=e201]:
+              - link "Staff Email" [ref=e202] [cursor=pointer]:
+                - /url: https://mail.zanzibar.go.tz/
+            - listitem [ref=e203]:
+              - link "Salary Claim" [ref=e204] [cursor=pointer]:
+                - /url: https://salary.zanzibar.go.tz/
+        - generic [ref=e205]:
+          - heading "Government Links" [level=4] [ref=e206]
+          - list [ref=e207]:
+            - listitem [ref=e208]:
+              - link "State House Zanzibar" [ref=e209] [cursor=pointer]:
+                - /url: https://ikulu.go.tz/
+            - listitem [ref=e210]:
+              - link "eGAZ" [ref=e211] [cursor=pointer]:
+                - /url: https://egaz.go.tz/
+            - listitem [ref=e212]:
+              - link "ZAECA" [ref=e213] [cursor=pointer]:
+                - /url: https://zaeca.go.tz/
+            - listitem [ref=e214]:
+              - link "ZPSC" [ref=e215] [cursor=pointer]:
+                - /url: https://zpsc.go.tz/
+            - listitem [ref=e216]:
+              - link "IPA" [ref=e217] [cursor=pointer]:
+                - /url: https://ipa.go.tz/
+      - generic [ref=e218]: © 2026 Civil Service Commission – Zanzibar. All rights reserved.
+  - alert [ref=e219]

@@ -35,23 +35,64 @@ export function PageForm({ initial, parents }: { initial?: any; parents: { id: s
   }
 
   return (
-    <form onSubmit={save} className="admin-form">
-      <h1>{initial?.slug ? 'Edit page' : 'New page'}</h1>
-      {error && <p role="alert">{error}</p>}
-      <label>Slug
-        <input value={form.slug} onChange={set('slug')} required readOnly={!!initial?.slug} />
-      </label>
-      <label>Title (Swahili) <input value={form.titleSw} onChange={set('titleSw')} required /></label>
-      <label>Title (English) <input value={form.titleEn} onChange={set('titleEn')} /></label>
-      <label>Body (Swahili) <textarea value={form.bodySw} onChange={set('bodySw')} rows={12} required /></label>
-      <label>Body (English) <textarea value={form.bodyEn} onChange={set('bodyEn')} rows={12} /></label>
-      <label>Parent page
-        <select value={form.parentId} onChange={set('parentId')}>
-          <option value="">— No parent —</option>
-          {parents.map((p) => <option key={p.id} value={p.id}>{p.slug} ({p.titleSw})</option>)}
-        </select>
-      </label>
-      <button type="submit" disabled={saving}>Save page</button>
+    <form onSubmit={save} className="admin-form fade-in">
+      <div className="admin-page-header">
+        <h1>{initial?.slug ? 'Edit page' : 'New page'}</h1>
+      </div>
+
+      {error && <div className="admin-alert admin-alert-error">{error}</div>}
+
+      <div className="admin-form-section">
+        <h2>Page info</h2>
+        <div className="admin-form-grid">
+          <label>
+            Slug *
+            <input value={form.slug} onChange={set('slug')} required readOnly={!!initial?.slug} />
+          </label>
+          <label>
+            Parent page
+            <select value={form.parentId} onChange={set('parentId')}>
+              <option value="">— No parent —</option>
+              {parents.map((p) => <option key={p.id} value={p.id}>{p.slug} ({p.titleSw})</option>)}
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div className="admin-form-section">
+        <h2>Titles</h2>
+        <div className="admin-form-grid">
+          <label>
+            Title (Swahili) *
+            <input value={form.titleSw} onChange={set('titleSw')} required />
+          </label>
+          <label>
+            Title (English)
+            <input value={form.titleEn} onChange={set('titleEn')} />
+          </label>
+        </div>
+      </div>
+
+      <div className="admin-form-section">
+        <h2>Content</h2>
+        <div className="admin-form-grid">
+          <label className="full-width">
+            Body (Swahili) *
+            <textarea value={form.bodySw} onChange={set('bodySw')} rows={12} required />
+          </label>
+          <label className="full-width">
+            Body (English)
+            <textarea value={form.bodyEn} onChange={set('bodyEn')} rows={12} />
+          </label>
+        </div>
+      </div>
+
+      <div className="admin-form-section">
+        <button type="submit" className="admin-btn admin-btn-primary" disabled={saving}>
+          {saving && <span className="spinner" aria-hidden="true" />}
+          Save page
+        </button>
+      </div>
     </form>
   );
 }

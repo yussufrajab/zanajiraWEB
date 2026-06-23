@@ -1,0 +1,202 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Civil Service Commission – Zanzibar" [ref=e4] [cursor=pointer]:
+        - /url: /en
+        - generic [ref=e5]: Civil Service Commission – Zanzibar
+      - navigation "Primary" [ref=e6]:
+        - list [ref=e7]:
+          - listitem [ref=e8]:
+            - link "News" [ref=e9] [cursor=pointer]:
+              - /url: /en/news
+          - listitem [ref=e10]:
+            - link "Vacancy Announcements" [ref=e11] [cursor=pointer]:
+              - /url: /en/vacancies
+          - listitem [ref=e12]:
+            - link "Call for Interviews" [ref=e13] [cursor=pointer]:
+              - /url: /en/interviews
+          - listitem [ref=e14]:
+            - link "About Us" [ref=e15] [cursor=pointer]:
+              - /url: /en/about
+          - listitem [ref=e16]:
+            - link "Organization Structure" [ref=e17] [cursor=pointer]:
+              - /url: /en/organization
+          - listitem [ref=e18]:
+            - link "Our Services" [ref=e19] [cursor=pointer]:
+              - /url: /en/services
+          - listitem [ref=e20]:
+            - link "Contact Us" [ref=e21] [cursor=pointer]:
+              - /url: /en/contact
+          - listitem [ref=e22]:
+            - link "External Links" [ref=e23] [cursor=pointer]:
+              - /url: /en/external-links
+      - button "Switch language" [ref=e25] [cursor=pointer]: Kiswahili
+  - main [ref=e28]:
+    - generic [ref=e30]:
+      - generic [ref=e31]:
+        - heading "News" [level=1] [ref=e32]
+        - paragraph [ref=e33]: Read announcements and updates from the Civil Service Commission.
+      - form "Filter news" [ref=e34]:
+        - generic [ref=e35]:
+          - text: Keyword
+          - textbox "Keyword" [ref=e36]:
+            - /placeholder: Search...
+        - generic [ref=e37]:
+          - text: From
+          - textbox "From" [ref=e38]
+        - generic [ref=e39]:
+          - text: To
+          - textbox "To" [ref=e40]
+        - button "Filter" [ref=e41] [cursor=pointer]:
+          - img [ref=e42]
+          - text: Filter
+      - list [ref=e45]:
+        - listitem [ref=e46]:
+          - article [ref=e47]:
+            - heading "Civil Service Commission Holds Stakeholder Engagement Forum" [level=3] [ref=e48]:
+              - link "Civil Service Commission Holds Stakeholder Engagement Forum" [ref=e49] [cursor=pointer]:
+                - /url: /en/news/civil-service-commission-holds-stakeholder-engagement-forum-aeo8
+            - generic [ref=e50]:
+              - time [ref=e51]:
+                - img [ref=e52]
+                - text: 22/06/2026
+              - generic [ref=e54]: Published
+        - listitem [ref=e55]:
+          - article [ref=e56]:
+            - heading "Public Service Staff Training Calendar for 2026 Released" [level=3] [ref=e57]:
+              - link "Public Service Staff Training Calendar for 2026 Released" [ref=e58] [cursor=pointer]:
+                - /url: /en/news/public-service-staff-training-calendar-for-2026-released-qlwg
+            - generic [ref=e59]:
+              - time [ref=e60]:
+                - img [ref=e61]
+                - text: 22/06/2026
+              - generic [ref=e63]: Published
+        - listitem [ref=e64]:
+          - article [ref=e65]:
+            - heading "Civil Service Commission Launches New Online Job Application System" [level=3] [ref=e66]:
+              - link "Civil Service Commission Launches New Online Job Application System" [ref=e67] [cursor=pointer]:
+                - /url: /en/news/civil-service-commission-launches-new-online-job-application-77nx
+            - generic [ref=e68]:
+              - time [ref=e69]:
+                - img [ref=e70]
+                - text: 22/06/2026
+              - generic [ref=e72]: Published
+        - listitem [ref=e73]:
+          - article [ref=e74]:
+            - heading "Civil Service Commission Holds Stakeholder Engagement Forum" [level=3] [ref=e75]:
+              - link "Civil Service Commission Holds Stakeholder Engagement Forum" [ref=e76] [cursor=pointer]:
+                - /url: /en/news/civil-service-commission-holds-stakeholder-engagement-forum-3jv2
+            - generic [ref=e77]:
+              - time [ref=e78]:
+                - img [ref=e79]
+                - text: 22/06/2026
+              - generic [ref=e81]: Published
+        - listitem [ref=e82]:
+          - article [ref=e83]:
+            - heading "Public Service Staff Training Calendar for 2026 Released" [level=3] [ref=e84]:
+              - link "Public Service Staff Training Calendar for 2026 Released" [ref=e85] [cursor=pointer]:
+                - /url: /en/news/public-service-staff-training-calendar-for-2026-released-qae9
+            - generic [ref=e86]:
+              - time [ref=e87]:
+                - img [ref=e88]
+                - text: 22/06/2026
+              - generic [ref=e90]: Published
+        - listitem [ref=e91]:
+          - article [ref=e92]:
+            - heading "Civil Service Commission Launches New Online Job Application System" [level=3] [ref=e93]:
+              - link "Civil Service Commission Launches New Online Job Application System" [ref=e94] [cursor=pointer]:
+                - /url: /en/news/civil-service-commission-launches-new-online-job-application-80s1
+            - generic [ref=e95]:
+              - time [ref=e96]:
+                - img [ref=e97]
+                - text: 22/06/2026
+              - generic [ref=e99]: Published
+        - listitem [ref=e100]:
+          - article [ref=e101]:
+            - heading "Civil Service Commission Holds Stakeholder Engagement Forum" [level=3] [ref=e102]:
+              - link "Civil Service Commission Holds Stakeholder Engagement Forum" [ref=e103] [cursor=pointer]:
+                - /url: /en/news/civil-service-commission-holds-stakeholder-engagement-forum-a1sq
+            - generic [ref=e104]:
+              - time [ref=e105]:
+                - img [ref=e106]
+                - text: 22/06/2026
+              - generic [ref=e108]: Published
+        - listitem [ref=e109]:
+          - article [ref=e110]:
+            - heading "Public Service Staff Training Calendar for 2026 Released" [level=3] [ref=e111]:
+              - link "Public Service Staff Training Calendar for 2026 Released" [ref=e112] [cursor=pointer]:
+                - /url: /en/news/public-service-staff-training-calendar-for-2026-released-mp2r
+            - generic [ref=e113]:
+              - time [ref=e114]:
+                - img [ref=e115]
+                - text: 22/06/2026
+              - generic [ref=e117]: Published
+        - listitem [ref=e118]:
+          - article [ref=e119]:
+            - heading "Civil Service Commission Launches New Online Job Application System" [level=3] [ref=e120]:
+              - link "Civil Service Commission Launches New Online Job Application System" [ref=e121] [cursor=pointer]:
+                - /url: /en/news/civil-service-commission-launches-new-online-job-application-tl1w
+            - generic [ref=e122]:
+              - time [ref=e123]:
+                - img [ref=e124]
+                - text: 22/06/2026
+              - generic [ref=e126]: Published
+        - listitem [ref=e127]:
+          - article [ref=e128]:
+            - heading "Civil Service Commission Holds Stakeholder Engagement Forum" [level=3] [ref=e129]:
+              - link "Civil Service Commission Holds Stakeholder Engagement Forum" [ref=e130] [cursor=pointer]:
+                - /url: /en/news/civil-service-commission-holds-stakeholder-engagement-forum-rxy2
+            - generic [ref=e131]:
+              - time [ref=e132]:
+                - img [ref=e133]
+                - text: 22/06/2026
+              - generic [ref=e135]: Published
+  - contentinfo [ref=e136]:
+    - generic [ref=e137]:
+      - generic [ref=e138]:
+        - generic [ref=e139]:
+          - strong [ref=e141]: Civil Service Commission – Zanzibar
+          - paragraph [ref=e142]: "Address: P.O. Box 251, Zanzibar"
+          - paragraph [ref=e143]: "Phone: +255 24 223 2058"
+          - paragraph [ref=e144]: "Email: info@zanajira.go.tz"
+        - generic [ref=e145]:
+          - heading "Quick Links" [level=4] [ref=e146]
+          - list [ref=e147]:
+            - listitem [ref=e148]:
+              - link "› ZanAjira Application Portal" [ref=e149] [cursor=pointer]:
+                - /url: https://portal.zanajira.go.tz/home
+            - listitem [ref=e150]:
+              - link "› National Ajira Portal" [ref=e151] [cursor=pointer]:
+                - /url: https://www.ajira.go.tz/
+            - listitem [ref=e152]:
+              - link "› e-Office" [ref=e153] [cursor=pointer]:
+                - /url: https://eoffice.zanzibar.go.tz/
+            - listitem [ref=e154]:
+              - link "› HRMS" [ref=e155] [cursor=pointer]:
+                - /url: https://hrms.zanzibar.go.tz/
+            - listitem [ref=e156]:
+              - link "› Staff Email" [ref=e157] [cursor=pointer]:
+                - /url: https://mail.zanzibar.go.tz/
+            - listitem [ref=e158]:
+              - link "› Salary Claim" [ref=e159] [cursor=pointer]:
+                - /url: https://salary.zanzibar.go.tz/
+        - generic [ref=e160]:
+          - heading "Government Links" [level=4] [ref=e161]
+          - list [ref=e162]:
+            - listitem [ref=e163]:
+              - link "› State House Zanzibar" [ref=e164] [cursor=pointer]:
+                - /url: https://ikulu.go.tz/
+            - listitem [ref=e165]:
+              - link "› eGAZ" [ref=e166] [cursor=pointer]:
+                - /url: https://egaz.go.tz/
+            - listitem [ref=e167]:
+              - link "› ZAECA" [ref=e168] [cursor=pointer]:
+                - /url: https://zaeca.go.tz/
+            - listitem [ref=e169]:
+              - link "› ZPSC" [ref=e170] [cursor=pointer]:
+                - /url: https://zpsc.go.tz/
+            - listitem [ref=e171]:
+              - link "› IPA" [ref=e172] [cursor=pointer]:
+                - /url: https://ipa.go.tz/
+      - generic [ref=e173]: © 2026 Civil Service Commission – Zanzibar. All rights reserved.
+  - alert [ref=e174]

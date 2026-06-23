@@ -1,0 +1,80 @@
+- generic [ref=e1]:
+  - alert [ref=e2]
+  - generic [ref=e3]:
+    - complementary "Admin navigation" [ref=e4]:
+      - generic [ref=e6]:
+        - text: CSC Zanzibar
+        - text: Admin Portal
+      - navigation "Admin" [ref=e7]:
+        - link "Dashboard" [ref=e8] [cursor=pointer]:
+          - /url: /admin/dashboard
+          - img [ref=e9]
+          - text: Dashboard
+        - link "News" [ref=e14] [cursor=pointer]:
+          - /url: /admin/news
+          - img [ref=e15]
+          - text: News
+        - link "Vacancies" [ref=e18] [cursor=pointer]:
+          - /url: /admin/vacancies
+          - img [ref=e19]
+          - text: Vacancies
+        - link "Interviews" [ref=e22] [cursor=pointer]:
+          - /url: /admin/interviews
+          - img [ref=e23]
+          - text: Interviews
+        - link "Pages" [ref=e28] [cursor=pointer]:
+          - /url: /admin/pages
+          - img [ref=e29]
+          - text: Pages
+        - link "Users" [ref=e31] [cursor=pointer]:
+          - /url: /admin/users
+          - img [ref=e32]
+          - text: Users
+        - link "Reviews" [ref=e35] [cursor=pointer]:
+          - /url: /admin/reviews
+          - img [ref=e36]
+          - text: Reviews
+      - generic [ref=e38]: © 2026 CSC Zanzibar
+    - generic [ref=e39]:
+      - banner [ref=e40]:
+        - generic [ref=e41]:
+          - button "Open menu" [active] [ref=e106] [cursor=pointer]:
+            - img [ref=e107]
+          - generic [ref=e42]: Admin Portal
+        - button "Logout" [ref=e49] [cursor=pointer]:
+          - img [ref=e50]
+          - text: Logout
+      - main [ref=e53]:
+        - generic [ref=e54]:
+          - generic [ref=e56]:
+            - heading "Dashboard" [level=1] [ref=e57]
+            - paragraph [ref=e58]: Signed in as System Administrator (Administrator)
+          - generic [ref=e62]:
+            - generic [ref=e63]:
+              - generic [ref=e64]: Published Items
+              - generic [ref=e65]: "0"
+            - generic [ref=e66]:
+              - generic [ref=e67]: MDAs Hiring
+              - generic [ref=e68]: "0"
+            - generic [ref=e69]:
+              - generic [ref=e70]: Documents
+              - generic [ref=e71]: "0"
+            - generic [ref=e72]:
+              - generic [ref=e73]: Recent Months
+              - generic [ref=e74]: "0"
+          - generic [ref=e75]:
+            - generic [ref=e77]:
+              - heading "Published content by month" [level=2] [ref=e78]
+              - generic [ref=e79]:
+                - img [ref=e80]
+                - heading "No data yet" [level=3] [ref=e85]
+            - generic [ref=e87]:
+              - heading "Vacancies by MDA" [level=2] [ref=e88]
+              - generic [ref=e89]:
+                - img [ref=e90]
+                - heading "No vacancies yet" [level=3] [ref=e95]
+          - generic [ref=e97]:
+            - heading "Top downloaded documents" [level=2] [ref=e98]
+            - generic [ref=e99]:
+              - img [ref=e100]
+              - heading "No downloads yet" [level=3] [ref=e105]

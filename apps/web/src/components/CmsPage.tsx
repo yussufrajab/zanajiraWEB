@@ -15,12 +15,12 @@ export async function CmsPage({ locale, slug }: { locale: string; slug: string }
   const body = localizedField(page.bodySw, page.bodyEn, locale as 'sw' | 'en');
   const t = await getTranslations({ locale, namespace: 'Common' });
   return (
-    <article>
+    <article className="cms-page fade-in">
       <h1>
         {title.text}
-        {!title.translated && <small> · {t('notTranslated')}</small>}
+        {!title.translated && <span className="text-muted"> · {t('notTranslated')}</span>}
       </h1>
-      <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(body.text || '') }} />
+      <div className="cms-body" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(body.text || '') }} />
     </article>
   );
 }

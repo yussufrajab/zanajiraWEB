@@ -1,0 +1,70 @@
+- generic [active] [ref=e1]:
+  - alert [ref=e2]
+  - generic [ref=e3]:
+    - complementary "Admin navigation" [ref=e4]:
+      - generic [ref=e6]:
+        - text: CSC Zanzibar
+        - text: Admin Portal
+      - navigation "Admin" [ref=e7]:
+        - link "Dashboard" [ref=e8] [cursor=pointer]:
+          - /url: /admin/dashboard
+          - img [ref=e9]
+          - text: Dashboard
+        - link "News" [ref=e14] [cursor=pointer]:
+          - /url: /admin/news
+          - img [ref=e15]
+          - text: News
+        - link "Vacancies" [ref=e18] [cursor=pointer]:
+          - /url: /admin/vacancies
+          - img [ref=e19]
+          - text: Vacancies
+        - link "Interviews" [ref=e22] [cursor=pointer]:
+          - /url: /admin/interviews
+          - img [ref=e23]
+          - text: Interviews
+        - link "Pages" [ref=e28] [cursor=pointer]:
+          - /url: /admin/pages
+          - img [ref=e29]
+          - text: Pages
+        - link "Users" [ref=e31] [cursor=pointer]:
+          - /url: /admin/users
+          - img [ref=e32]
+          - text: Users
+        - link "Reviews" [ref=e35] [cursor=pointer]:
+          - /url: /admin/reviews
+          - img [ref=e36]
+          - text: Reviews
+      - generic [ref=e38]: © 2026 CSC Zanzibar
+    - generic [ref=e39]:
+      - banner [ref=e40]:
+        - generic [ref=e42]: Admin Portal
+        - generic [ref=e43]:
+          - generic [ref=e44]:
+            - generic [ref=e45]: SA
+            - generic [ref=e46]:
+              - generic [ref=e47]: System Administrator
+              - generic [ref=e48]: Administrator
+          - button "Logout" [ref=e49] [cursor=pointer]:
+            - img [ref=e50]
+            - text: Logout
+      - main [ref=e53]:
+        - generic [ref=e54]:
+          - generic [ref=e55]:
+            - heading "News" [level=1] [ref=e56]
+            - link "New news" [ref=e57] [cursor=pointer]:
+              - /url: /admin/news/new
+              - img [ref=e58]
+              - text: New news
+          - generic [ref=e60]:
+            - text: Status
+            - combobox "Status" [ref=e61]:
+              - option "All (public)" [selected]
+              - option "Draft"
+              - option "InReview"
+              - option "Published"
+              - option "Rejected"
+              - option "Archived"
+          - generic [ref=e62]:
+            - img [ref=e63]
+            - heading "No news items" [level=3] [ref=e68]
+            - paragraph [ref=e69]: Create your first news article to get started.

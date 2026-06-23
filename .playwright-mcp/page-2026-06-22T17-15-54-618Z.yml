@@ -1,0 +1,15 @@
+- generic [ref=e1]:
+  - alert [ref=e2]
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - img "CSC Zanzibar logo" [ref=e6]
+      - heading "Admin Login" [level=1] [ref=e7]
+      - paragraph [ref=e8]: Civil Service Commission — Zanzibar
+    - generic [ref=e9]:
+      - generic [ref=e10]:
+        - text: Email
+        - textbox "Email" [active] [ref=e11]
+      - generic [ref=e12]:
+        - text: Password
+        - textbox "Password" [ref=e13]
+      - button "Sign in" [ref=e14] [cursor=pointer]

@@ -2,12 +2,15 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import Link from 'next/link';
+import { Loading } from '../Loading';
+import { AdminHeader } from './AdminHeader';
+import { Sidebar } from './Sidebar';
 
 export function AdminShell({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
   const [ready, setReady] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -19,23 +22,16 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
     setReady(true);
   }, [router, pathname]);
 
-  if (!ready) return <p>Loading…</p>;
+  if (!ready) return <Loading />;
   if (pathname === '/admin/login') return <>{children}</>;
 
   return (
-    <div className="admin">
-      <aside>
-        <nav aria-label="Admin">
-          <Link href="/admin/dashboard">Dashboard</Link>
-          <Link href="/admin/news">News</Link>
-          <Link href="/admin/vacancies">Vacancies</Link>
-          <Link href="/admin/interviews">Interviews</Link>
-          <Link href="/admin/pages">Pages</Link>
-          <Link href="/admin/users">Users</Link>
-          <Link href="/admin/reviews">Reviews</Link>
-        </nav>
-      </aside>
-      <main>{children}</main>
+    <div className="admin-layout">
+      <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <div className="admin-main">
+        <AdminHeader onMenuClick={() => setSidebarOpen(true)} />
+        <main className="admin-content">{children}</main>
+      </div>
     </div>
   );
 }
