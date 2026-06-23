@@ -437,6 +437,32 @@ p { margin-bottom: var(--space-4); }
 }
 
 /* =============================================================================
+   Top Bar — government branding banner
+   ============================================================================= */
+.top-bar {
+  width: 100%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 0;
+}
+
+.top-bar img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  max-height: 80px;
+  width: auto;
+}
+
+@media (max-width: 768px) {
+  .top-bar img {
+    max-height: 60px;
+  }
+}
+
+/* =============================================================================
    Header
    ============================================================================= */
 .site-header {

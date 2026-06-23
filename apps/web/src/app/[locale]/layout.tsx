@@ -37,6 +37,9 @@ export default async function LocaleLayout({
   const messages = await getMessages();
   return (
     <NextIntlClientProvider messages={messages}>
+      <div className="top-bar">
+        <img src="/branding/top_bar.png" alt="" />
+      </div>
       <Header locale={locale} />
       <main>
         <div className="page-content">
