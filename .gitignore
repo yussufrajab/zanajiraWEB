@@ -40,3 +40,16 @@ test-results/
 
 # Claude Code local session state
 .claude/.playwright-mcp
+
+# Claude AI session state
+.claude/.playwright-mcp/
+.playwright-mcp/
+.claude/plan.md
+.claude/memory/
+.claude/projects/
+
+# Development snapshots
+homepage-snapshot.md
+
+# Generated
+node
